@@ -1,0 +1,127 @@
+/* styles.css */
+
+/* 1. Colores personalizados (Fondo y texto) */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Color gris muy claro de fondo */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+/* 2. Estilos a encabezados y párrafos */
+header {
+    background-color: #2c3e50; /* Azul oscuro */
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+h1 {
+    color: #0aaa45;
+
+}
+
+h2, h3 {
+    color: #2c3e50;
+}
+
+/* Centrar imágenes y videos */
+img {
+    display: block;
+    margin: 10px auto;
+    max-width: 100;
+    height: auto;
+    position: center;
+}
+ 
+video {
+    display: block;
+    margin: 10px auto;
+    max-width: 100%;
+    height: auto;
+    position: center;
+}
+
+/* Estilo a párrafos */
+p {
+    line-height: 1.6;
+}
+
+/* Navegación básica */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+    text-align: center;
+}
+
+/* Estilo a enlaces de navegación */
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* 3. Bordes o estilos a la tabla */
+table {
+    width: 50%;
+    border-collapse: collapse; /* Para que los bordes se unan */
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+table, th, td {
+    border: 1px solid #2c3e50; 
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #3498db; /* Azul claro para encabezado de tabla */
+    color: white;
+}
+
+/* 3. Bordes o estilos al formulario */
+form {
+    background-color: white;
+    padding: 20px;
+    border: 2px solid #3498db; /* Borde azul al formulario */
+    border-radius: 8px; /* Bordes redondeados */
+    max-width: 400px;
+}
+
+input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 90%;
+}
+
+button {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #3498db;
+}
+
+/* 4. Estilo al pie de página */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #666;
+}

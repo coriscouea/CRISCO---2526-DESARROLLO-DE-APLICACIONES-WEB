@@ -1,0 +1,112 @@
+<!DOCTYPE html>  <!-- Declaración del tipo de documento HTML5 -->
+<html lang="es">  <!-- Idioma del documento: español -->
+
+<head>  <!-- Metadatos del documento -->
+
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres (UTF-8) -->  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajusta la visualización en dispositivos móviles -->  
+    <title>MI PÁGINA WEB </title> <!-- Título que aparece en la pestaña del navegador -->  
+    <link rel="stylesheet" href="styles.css"> <!-- Vincula la hoja de estilos externa -->  
+</head>  
+<body>  <!-- Cuerpo del documento -->
+        
+    <header> <!-- Encabezado principal de la página -->  
+        <h1>APLICACIONES WEB</h1> <!-- Título principal -->  
+        <nav> <!-- Menú de navegación -->  
+            <ul> <!-- Lista de enlaces -->  
+                <li><a href="index.html">Inicio</a></li> <!-- Enlace a la página de inicio -->   
+                <li><a href="/Semana 2/index.html">Semana 02</a></li> <!-- Enlace a Semana 2 -->  
+                <li><a href="index.html">Semana 03</a></li> <!-- Enlace a Semana 3 -->  
+            </ul>  
+        </nav>       
+    </header>  
+                
+    <main> <!-- Contenido principal de la página -->  
+        <section id="inicio"> <!-- Sección de introducción -->  
+            <h2>SEMANA 03</h2>  
+            <article> <!-- Artículo explicativo -->  
+                <h3>Estructura Básica de un Documento HTML</h3>  
+                <p><strong>HTML</strong> es el <em>lenguaje de marcado estándar</em> para crear páginas web.</p>  
+                <p>La <strong>estructura básica</strong> incluye varios <em>elementos esenciales</em>.</p>  
+            </article>  
+
+            <img src="/Semana 3/assets/img/imagen.jpg" alt="Html" width="400"> <!-- Imagen ilustrativa -->  
+            
+            <br><br> <!-- Saltos de línea -->  
+
+            <video width="320" height="240" controls> <!-- Video con controles -->  
+                <source src="/Semana 3/assets/video/video1.mp4" type="video/mp4"> <!-- Fuente del video -->  
+                Your browser does not support the video tag. <!-- Mensaje alternativo -->  
+            </video>  
+        </section>    
+
+        <section id="listas"> <!-- Sección sobre listas -->  
+            <h2> Listas en HTML</h2>  
+            <h3> Listas Ordenadas</h3>  
+            <ol> <!-- Lista numerada -->  
+                <li>Encabezado</li>  
+                <li>Párrafos</li>  
+                <li>Imágenes</li>  
+            </ol>  
+
+            <h3> Listas Desordenadas</h3>  
+            <ul> <!-- Lista con viñetas -->  
+                <li>Video</li>  
+                <li>Tabla</li>  
+                <li>Formulario</li>   
+            </ul>  
+        </section>  
+
+        <section id="enlace"> <!-- Sección de enlaces externos -->  
+            <h2> Enlaces Externo</h2>  
+            <p>Visita el sitio web de la Universidad Estatal Amazónica  
+               <a href="https://www.uea.edu.ec/web/v2/" target="_blank">Universidad de la UEA</a>. <!-- Enlace externo que abre en nueva pestaña -->  
+            </p>  
+        </section>  
+
+        <section id="tabla"> <!-- Sección con tabla -->  
+            <h2>Ejemplo de Tabla</h2>  
+            <table> <!-- Tabla HTML -->  
+                <thead> <!-- Encabezado de la tabla -->  
+                    <tr>  
+                        <th>Elemento</th>  
+                        <th>Descripción</th>  
+                    </tr>  
+                </thead>  
+                <tbody> <!-- Cuerpo de la tabla -->  
+                    <tr>  
+                        <td>&lt;h1&gt;</td>  <!-- Fila de la tabla -->
+                        <td>Encabezado principal</td>  <!-- Descripción del elemento -->
+                    </tr>  
+                    <tr>  
+                        <td>&lt;p&gt;</td>  <!-- Fila de la tabla -->
+                        <td>Párrafo de texto</td>  <!-- Descripción del elemento -->
+                    </tr>  
+                    <tr>  
+                        <td>&lt;img&gt;</td>  <!-- Fila de la tabla -->
+                        <td>Imagen insertada</td>  <!-- Descripción del elemento -->
+                    </tr>  
+                </tbody>  
+            </table>  
+        </section>  
+
+        <section id="contacto"> <!-- Sección de formulario -->  
+            <h2>Formulario de contacto</h2>  
+            <form> <!-- Formulario -->  
+                <label for="nombre">Nombre:</label><br> <!-- Etiqueta para el campo nombre -->  
+                <input type="text" id="nombre" name="nombre" required><br><br> <!-- Campo de texto obligatorio -->  
+
+                <label for="correo">Correo:</label><br> <!-- Etiqueta para el campo correo -->  
+                <input type="email" id="correo" name="correo" required><br><br> <!-- Campo de correo obligatorio -->  
+
+                <button type="submit">Enviar</button> <!-- Botón de envío -->  
+            </form>  
+        </section>  
+    </main>  
+
+    <footer> <!-- Sección final. -->  
+        <p>&copy; 2025 Universidad Estatal Amazónica - Tarea Semana 3</p> <!-- Derechos de autor -->  
+    </footer>  
+
+</body>  
+</html>  
