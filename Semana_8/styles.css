@@ -1,0 +1,56 @@
+/* Semana_8 - styles.css */
+
+/* ESTILOS GENERALES*/
+h4 {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #eaecee;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* CARRUSEL */
+.img-carousel {
+    max-height: 400px;
+    object-fit: cover;
+    width: 100%;
+}
+
+/*TARJETAS Y FORMULARIO*/
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+/* Formulario */
+form {
+    background-color: rgb(234, 231, 231);
+    padding: 20px;
+    border: 2px solid #88c2e8;
+    border-radius: 8px;
+    max-width: 600px;
+
+}
+
+/*TABLA*/
+.table {
+    background-color: #ffffff;
+}
+
+/*PIE DE PÁGINA */
+footer a {
+    text-decoration: none;
+}
+
+/* Estilo del botón */
+.btn.btn-success  { 
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #85c887;
+    color: rgb(27, 19, 19);
+    border-radius: 15px;
+    cursor: pointer;
+    
+}
+/*final Semana_8 - styles.css */

@@ -1,0 +1,140 @@
+<!--Tarea: Semana 08: Mejora de interfaces con Bootstrap y JavaScript-->
+
+<!DOCTYPE html> 
+<html lang="es"> 
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Página Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ======= ENCABEZADO / NAVBAR ======= -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Navegación</a>
+
+        <!-- Botón responsive -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Enlaces del menú -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ======= CONTENIDO PRINCIPAL ======= -->
+<div class="container my-5">
+
+    <!-- Carrusel -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-6">
+            <h4>Galería</h4>
+
+            <div id="carouselExample" class="carousel slide shadow rounded overflow-hidden" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="assets/img/Imagen10.png" class="d-block w-100 img-carousel" alt="Imagen 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/img/imagen12.png" class="d-block w-100 img-carousel" alt="Imagen 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/img/imagen11.png" class="d-block w-100 img-carousel" alt="Imagen 3">
+                    </div>
+                </div>
+
+                <!-- Controles -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de productos -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h4>Lista de Productos</h4>
+
+            <table class="table table-hover table-bordered shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Producto A</td><td>$10</td><td>20</td></tr>
+                    <tr><td>Producto B</td><td>$15</td><td>10</td></tr>
+                </tbody>
+            </table>
+
+            <button class="btn btn-primary" onclick="mostrarAlerta()">Mostrar mensaje rápido</button>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm p-4">
+                <h4>Contacto</h4>
+
+                <form id="formulario" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre :</label>
+                        <input type="text" id="nombre" class="form-control" required placeholder="Ej: Carlos Contreras">
+                        <small class="text-danger" id="errorNombre"></small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Correo :</label>
+                        <input type="email" id="correo" class="form-control" required placeholder="Ej: Carlos_Contreras@gmail.com">
+                        <small class="text-danger" id="errorCorreo"></small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Mensaje :</label>
+                        <textarea id="mensaje" class="form-control" rows="3" required placeholder="Ej: Hola este es mi trabajo de la Semana_8"></textarea>
+                        <small class="text-danger" id="errorMensaje"></small>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======= PIE DE PÁGINA ======= -->
+<footer class="bg-dark text-white text-center p-4 mt-5">
+    <p class="mb-0"> 2026 César. - Mi Proyecto Web | <a href="#" class="text-info">Instagram</a></p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript personalizado -->
+<script src="script.js"></script>
+</body>
+</html> <!-- fin de la semana   
+
+
+
