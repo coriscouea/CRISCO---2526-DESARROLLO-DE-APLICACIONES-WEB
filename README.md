@@ -1,6 +1,13 @@
-# Mi Página Web - Tarea Semana 8
+# Mi Página Web - Tarea Semana 9
 
 📌 Descripción
-Este proyecto corresponde a la **Tarea de la Semana 8** de la asignatura de Desarrollo de Aplicaciones Web.  
-Mejora de interfaces con Bootstrap y JavaScript 
-**HTML5, CSS y JavaScript**.
+
+Configuración básica de un proyecto web y manejo de rutas.
+
+**python, Entorno virtual, Flask**.
+
+Ejemplo de Salida:
+http://127.0.0.1:5000/
+http://127.0.0.1:5000/usuario/cesar
+http://127.0.0.1:5000/articulo/5
+http://127.0.0.1:5000/sobre-mi
