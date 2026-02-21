@@ -1,0 +1,86 @@
+/* Estilos CSS para el Blog Estudiantil */
+
+/* Fuente y colores generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Fondo claro para todo el sitio */
+    color: #333; /* Color de texto general */
+}
+
+/* Encabezado principal */
+header {
+    background-color: #68aada; /* Verde para el encabezado */
+    color: white;
+    text-align: center;
+    padding: 1rem ;
+}
+
+/* Menu de navegación */
+nav {
+    background-color: #a3dea5; /* Verde más oscuro para el menú */
+    padding: 0.5rem 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    
+}
+
+nav ul li {
+    margin: 0 ;
+}
+nav ul li a {
+    color: rgb(81, 78, 78);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    display: block;
+}
+nav ul li a:hover {
+    background-color: #68aada; /* Verde para el hover */
+
+}
+
+/* Contenido principal */
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: white; /* Fondo blanco para el contenido */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad */   
+}
+
+/* Encabezados */
+
+h2 {
+    color: #68aada; /* Verde para los encabezados */
+    margin-bottom: 1rem;
+}
+
+/* Pie de página */
+footer {
+    background-color: #c6cbc6; /* Verde más oscuro para el pie de página */
+    color: rgb(40, 43, 43);
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem; 
+    position: fixed; /* Fija el pie de página en la parte inferior */
+    bottom: 0; 
+    width: 100%; /* Asegura que el pie de página ocupe todo el ancho */
+    font-size: 1rem;
+}
+
+/* Encabesado principal */
+#titulo-blog {
+    font-size: 3.5rem; /* Tamaño grande para el título principal */
+    text-align: center;
+    margin-top: 1rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}

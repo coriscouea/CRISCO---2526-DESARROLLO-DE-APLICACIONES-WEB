@@ -1,0 +1,37 @@
+<!-- base.html - Plantilla base para el Blog Estudiantil-->
+<!-- Esta plantilla define la estructura común para todas las páginas del blog. -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Mi Blog Estudiantil{% endblock %}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}"> <!-- Vincula la hoja de estilos CSS -->
+
+</head>
+<body>
+    <header class="container text-center my-4">
+        <h1 id="titulo-blog" class="display-4">Blog Estudiantil</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{{url_for('inicio')}}">Inicio</a></li>
+            <li><a href="{{url_for('acerca_de')}}">Acerca de mí</a></li>
+            <li><a href="{{url_for('productos')}}">Productos</a></li>
+            <li><a href="{{url_for('clientes')}}">Clientes</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %} {% endblock %}
+        <!-- Contenido específico de cada página -->
+    </main>
+    
+    <footer>
+        <p>@ 2026 César - Blog Estudiantil.</p>
+    
+    </footer>
+</body>
+</html>

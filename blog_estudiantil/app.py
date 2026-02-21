@@ -1,46 +1,57 @@
-# app.py - Blog Estudiantil (proyecto individual)
-# Aplicación Flask con rutas principal, dinámica y "Sobre mí"
+# Blog Estudiantil (proyecto individual)
+# Aplicación Flask para un blog estudiantil con rutas estáticas y plantilla base.
 
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for
+# Importamos Flask para crear la aplicación, render_template para renderizar las plantillas HTML,
+# request para manejar datos de formularios (si es necesario), redirect y url_for para redireccionar a otras rutas.
 
 # Crear la instancia de la aplicación
 app = Flask(__name__)
 
 # ------------------------------------------------------------
-# Ruta principal: página de inicio
+# Ruta principal: muestra la página de inicio
 # ------------------------------------------------------------
-@app.route("/usuario/<nombre>")
-def usuario(nombre):
-    """Muestra un mensaje personalizado para un usuario específico."""
-    return f"<h1>¡Hola, {nombre}!</h1><p>Bienvenido a mi blog estudiantil. Explora los artículos disponibles.</p>"
-
 
 @app.route("/")
-def home():
-    """Muestra el mensaje de bienvenida del blog estudiantil."""
-    return "<h1>Blog Estudiantil - Comparte tus ideas</h1><p>Aquí encontrarás artículos escritos por estudiantes.</p>"
+def inicio():
+    # renderiza la plantilla index.html (que está en la carpeta "contenido").
+
+    return render_template("contenido/index.html")
 
 # ------------------------------------------------------------
-# Ruta dinámica: muestra un artículo según su ID
+# Ruta estática: muestra la página "Acerca de mí"
 # ------------------------------------------------------------
-@app.route("/articulo/<int:id>")
-def articulo(id):
-    """
-    Recibe un número entero como ID y devuelve un mensaje personalizado.
-    Más adelante aquí se mostrará el contenido real del artículo.
-    """
-    return f"<h1>Artículo {id}</h1><p>Este artículo fue escrito por un estudiante. Pronto tendremos el contenido completo.</p>"
+
+@app.route("/about")
+def acerca_de():
+    # renderiza la plantilla about.html (en "contenido").
+    
+    return render_template("contenido/about.html")
 
 # ------------------------------------------------------------
-# Ruta adicional: información sobre el creador del blog
+# Ruta estatica: muestra la página del productos
 # ------------------------------------------------------------
-@app.route("/sobre-mi")
-def sobre_mi():
-    """Página 'Sobre mí' para identificar al autor del blog."""
-    return "<h1>Sobre Mí</h1><p>Soy un estudiante apasionado por compartir conocimientos y experiencias a través de este blog. ¡Bienvenido!</p>"
+
+@app.route("/productos")
+def productos():
+    # Renderiza la plantilla productos.html (en "contenido").
+
+    return render_template("contenido/productos.html")
+
+# ------------------------------------------------------------
+# Ruta estática: muestra la página de clientes
+# ------------------------------------------------------------
+
+@app.route("/clientes")
+def clientes():
+    # Renderiza la plantilla clientes.html (en "contenido").
+
+    return render_template("contenido/clientes.html")
+
 
 # ------------------------------------------------------------
 # Punto de entrada: ejecutar la aplicación en modo debug
 # ------------------------------------------------------------
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,17 +1,17 @@
-# Mi Página Web - Tarea Semana 9
+# Mi Página Web - Tarea Semana 10
 
 📌 Descripción
 
-Configuración básica de un proyecto web y manejo de rutas.
+Plantillas de generación de contenido dinámico y reutilización de componentes.
 
-**python, Entorno virtual, Flask**.
+**python, Entorno virtual, Flask, jinja2**.
 
 Ejemplo de Salida:
 
 http://127.0.0.1:5000/
 
-http://127.0.0.1:5000/usuario/cesar
+http://127.0.0.1:5000/about
 
-http://127.0.0.1:5000/articulo/5
+http://127.0.0.1:5000/productos
 
-http://127.0.0.1:5000/sobre-mi
+http://127.0.0.1:5000/clientes
