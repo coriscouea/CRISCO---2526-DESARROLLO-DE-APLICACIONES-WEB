@@ -1,0 +1,34 @@
+<!-- página con herencia de base.html,
+muestra el inventario de productos con opciones para editar, eliminar y buscar productos. --> 
+
+{% extends "semana_10/ediccion/base.html" %}
+{% block title %}Inventario{% endblock %}
+{% block content %}
+<h2>Inventario de Productos</h2>
+<table border="1">
+    <tr>
+        <th>ID</th><th>Nombre</th><th>Cantidad</th><th>Precio</th><th>Acciones</th>
+    </tr>
+    {% for p in productos %}
+    <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.cantidad }}</td>
+        <td>{{ p.precio }}</td>
+        <td>
+            <a href="{{ url_for('editar', id=p.id) }}">Editar</a> |
+            <a href="{{ url_for('eliminar', id=p.id) }}">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<form action="{{ url_for('buscar') }}" method="POST">
+    <p class="buscar-form">
+        Buscar por nombre: 
+        <input type="text" name="nombre" class="input-text">
+        <input type="submit" value="Buscar" class="btn-buscar">
+    </p>
+
+</form>
+{% endblock %}

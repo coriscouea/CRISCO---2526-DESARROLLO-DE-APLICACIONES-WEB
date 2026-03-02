@@ -21,10 +21,25 @@
             <li><a href="{{url_for('acerca_de')}}">Acerca de mí</a></li>
             <li><a href="{{url_for('productos')}}">Productos</a></li>
             <li><a href="{{url_for('clientes')}}">Clientes</a></li>
+            <li><a href="{{url_for('form')}}">Formulario</a></li>
+            <li><a href="{{ url_for('ver_inventario') }}">Ver Inventario</a></li>
+            <li><a href="{{ url_for('agregar') }}">Agregar Producto</a></li>
+
+        
         </ul>
     </nav>
 
     <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for msg in messages %}
+                        <li>{{ msg }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
         {% block content %} {% endblock %}
         <!-- Contenido específico de cada página -->
     </main>

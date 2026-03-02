@@ -1,0 +1,31 @@
+<!-- página con herencia de base.html,
+muestra el formulario para agregar o editar un producto en el inventario,
+utilizando WTForms para generar los campos del formulario. --> 
+
+{% extends "semana_10/ediccion/base.html" %}
+{% block title %}Formulario Producto{% endblock %}
+{% block content %}
+<h2 class="form-title">Formulario de Producto</h2>
+<form method="POST" class="form-producto">
+    {{ form.hidden_tag() }}
+    
+    <p class="form-group">
+        {{ form.nombre.label(class="form-label") }}
+        {{ form.nombre(class="form-input", size=20) }}
+    </p>
+    
+    <p class="form-group">
+        {{ form.cantidad.label(class="form-label") }}
+        {{ form.cantidad(class="form-input", size=20) }}
+    </p>
+    
+    <p class="form-group">
+        {{ form.precio.label(class="form-label") }}
+        {{ form.precio(class="form-input", size=20) }}
+    </p>
+    
+    <p class="form-group">
+        {{ form.submit(class="btn-submit") }}
+    </p>
+</form>
+{% endblock %}
