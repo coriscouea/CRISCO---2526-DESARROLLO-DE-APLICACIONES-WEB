@@ -1,28 +1,37 @@
-# bd.py - Módulo para manejar la base de datos SQLite del inventario de productos.
-# Define funciones para crear la conexión a la base de datos y para inicializar la estructura de
-# la base de datos, creando la tabla de productos si no existe. Utiliza el módulo sqlite3 de Python
-# para interactuar con la base de datos y pathlib para manejar rutas de archivos de manera más segura y compatible entre sistemas operativos.
+# bd.py - Módulo de Base de Datos para el Blog Estudiantil
+# Gestiona la conexión y estructura de datos SQLite utilizando SQLAlchemy
+# Implementa funciones para inicializar la BD y crear sesiones persistentes
 
-import sqlite3
-from pathlib import Path
+from semana_11.modelos import init_db as crear_tablas, crear_sesion, engine
 
-# Definir la ruta de la base de datos utilizando pathlib para asegurar compatibilidad entre sistemas operativos
-db_path = Path(__file__).parent / "semana_11/almacenamiento" / "inventario.db"
-
-# Función para crear una conexión a la base de datos SQLite
 def crear_conexion():
-    db_path.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(db_path)
-    return conn
+    """Crea y retorna una conexión a la base de datos SQLite del blog.
+
+    Retorna una sesión de SQLAlchemy para realizar operaciones en la BD.
+    Esta función mantiene compatibilidad con código existente que usaba sqlite3.
+
+    Returns:
+        Session: Sesión de SQLAlchemy conectada a la base de datos
+    """
+    return crear_sesion()
 
 def init_db():
-    with crear_conexion() as conn:
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS productos (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nombre TEXT NOT NULL,
-                cantidad INTEGER NOT NULL,
-                precio REAL NOT NULL
-            )
-        """)
-        conn.commit()
+    """Inicializa la estructura de la base de datos del blog.
+
+    Utiliza SQLAlchemy para crear las tablas necesarias para el blog estudiantil:
+    - autores: información de los autores
+    - articulos: artículos publicados
+    - comentarios: comentarios en los artículos
+
+    Se ejecuta automáticamente al iniciar la aplicación.
+    """
+    # Importar los modelos para que SQLAlchemy los reconozca
+    from semana_11.modelos import Autor, Articulo, Comentario
+    
+    # Crear todas las tablas
+    crear_tablas()
+    
+    print("✓ Base de datos inicializada con SQLAlchemy")
+    print(f"  - Engine: {engine.url}")
+    print(f"  - Tablas creadas: autores, articulos, comentarios")
+

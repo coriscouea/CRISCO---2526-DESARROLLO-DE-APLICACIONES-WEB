@@ -2,51 +2,89 @@
 <!-- Esta plantilla define la estructura común para todas las páginas del blog. -->
 
 <!DOCTYPE html>
+<!-- Define el tipo de documento como HTML5 -->
 <html lang="es">
+<!-- Inicia el documento HTML con idioma español -->
 <head>
+    <!-- Sección de metadatos y configuración de la página -->
     <meta charset = "UTF-8">
+    <!-- Define la codificación de caracteres como UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Mi Blog Estudiantil{% endblock %}</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}"> <!-- Vincula la hoja de estilos CSS -->
-
+    <!-- Configura la página para ser responsive en dispositivos móviles -->
+    <meta name="description" content="Blog Estudiantil - Comparte conocimientos y experiencias académicas">
+    <!-- Descripción de la página para motores de búsqueda -->
+    <title>{% block title %} Blog Estudiantil{% endblock %}</title>
+    <!-- Título de la página con bloque para sobreescribir en plantillas hijo -->
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <!-- Enlaza la hoja de estilos CSS del directorio static -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <!-- Define el icono (favicon) de la página -->
+    
 </head>
+<!-- Cierra la sección head -->
 <body>
+    <!-- Inicio del cuerpo de la página -->
     <header class="container text-center my-4">
-        <h1 id="titulo-blog" class="display-4">Blog Estudiantil</h1>
+        <!-- Encabezado de la página con clases de estilo -->
+        <h1 id="titulo-blog" class="display-4"> 
+        <i class="fa-solid fa-book"></i>     Blog Estudiantil</h1>
+        <!-- Título principal del blog -->
+        <p class="tagline">Compartiendo conocimiento entre estudiantes</p>
+        <!-- Subtítulo o eslogan del blog -->
     </header>
+    <!-- Cierra el encabezado -->
 
     <nav>
-        <ul>
+        <!-- Navegación principal del sitio --> 
+        <ul> 
+            <!-- Lista de enlaces de navegación -->
             <li><a href="{{url_for('inicio')}}">Inicio</a></li>
-            <li><a href="{{url_for('acerca_de')}}">Acerca de mí</a></li>
-            <li><a href="{{url_for('productos')}}">Productos</a></li>
-            <li><a href="{{url_for('clientes')}}">Clientes</a></li>
-            <li><a href="{{url_for('form')}}">Formulario</a></li>
-            <li><a href="{{ url_for('ver_inventario') }}">Ver Inventario</a></li>
-            <li><a href="{{ url_for('agregar') }}">Agregar Producto</a></li>
-
-        
+            <!-- Enlace a la página de inicio -->
+            <li><a href="{{url_for('ver_blog')}}">Blog</a></li>
+            <!-- Enlace a la página del blog -->
+            <li><a href="{{url_for('autores')}}">Autores</a></li>
+            <!-- Enlace a la página de autores -->
+            <li><a href="{{url_for('acerca_de')}}">Acerca de</a></li>
+            <!-- Enlace a la página Acerca de -->
+            <li><a href="{{url_for('nuevo_articulo')}}">Publicar Artículo</a></li>
+            <!-- Enlace a la página para publicar artículos -->
         </ul>
     </nav>
+    <!-- Cierra la navegación -->
 
     <main>
+        <!-- Contenido principal de la página -->
         {% with messages = get_flashed_messages() %}
+            <!-- Obtiene los mensajes flash (notificaciones) -->
             {% if messages %}
-                <ul class="flashes">
-                    {% for msg in messages %}
-                        <li>{{ msg }}</li>
-                    {% endfor %}
+                <!-- Verifica si hay mensajes para mostrar -->
+                <ul class="flashes"> <!-- Lista de mensajes flash -->
+                    {%-for msg in messages-%} <!-- Itera sobre cada mensaje -->
+                        <li>{{ msg }}</li> <!-- Muestra el mensaje -->
+                    {%-endfor-%}
                 </ul>
             {% endif %}
         {% endwith %}
+        <!-- Finaliza el bloque de mensajes flash -->
 
         {% block content %} {% endblock %}
-        <!-- Contenido específico de cada página -->
+        <!-- Bloque de contenido que será reemplazado por las plantillas hijo -->
     </main>
+    <!-- Cierra el contenido principal -->
     
     <footer>
-        <p>@ 2026 César - Blog Estudiantil.</p>
-    
+        <!-- Pie de página -->
+        <div class="footer-content">
+            <!-- Contenedor del footer -->
+            <p>&copy; 2026 Blog Estudiantil. Todos los derechos reservados.</p>
+            <!-- Copyright del proyecto -->
+            <p>Desarrollado por César - Proyecto Académico UEA</p>
+            <!-- Crédito del desarrollador -->
+        </div>
     </footer>
+    <!-- Cierra el pie de página -->
 </body>
+<!-- Cierra el cuerpo del documento -->
 </html>
+<!-- Cierra el documento HTML -->
+

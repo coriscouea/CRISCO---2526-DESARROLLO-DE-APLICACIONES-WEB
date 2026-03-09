@@ -7,22 +7,34 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9; /* Fondo claro para todo el sitio */
+    background-color: #dce2e0; /* Fondo claro y suave para blog académico */
     color: #333; /* Color de texto general */
 }
 
 /* Encabezado principal */
 header {
-    background-color: #68aada; /* Verde para el encabezado */
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Gradiente azul profesional */
     color: white;
     text-align: center;
-    padding: 1rem ;
+    padding: 2rem 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header .tagline {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+    font-style: italic;
 }
 
 /* Menu de navegación */
 nav {
-    background-color: #a3dea5; /* Verde más oscuro para el menú */
-    padding: 0.5rem 0;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 nav ul {
@@ -31,155 +43,530 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     
 }
 
 nav ul li {
-    margin: 0 ;
+    margin: 0;
 }
-nav ul li a {
-    color: rgb(81, 78, 78);
-    text-decoration: none;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    display: block;
-}
-nav ul li a:hover {
-    background-color: #68aada; /* Verde para el hover */
 
+nav ul li a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    display: block;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    font-size: 2.25rem;
+}
+
+nav ul li a:hover {
+    background-color: #3498db;
+    color: white;
+    border-bottom: 3px solid #2c3e50;
 }
 
 /* Contenido principal */
 main {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 2rem auto;
-    padding: 1rem;
-    background-color: white; /* Fondo blanco para el contenido */
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad */   
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Sombra suave para dar profundidad */
+    min-height: 80vh; /* Asegura que el main tenga una altura mínima para evitar solapamiento con el footer */
 }
 
 /* Encabezados */
 
 h2 {
-    color: #68aada; /* Verde para los encabezados */
+    color: #2c3e50;
     margin-bottom: 1rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
 }
 
-/* Pie de página */
+/* Pie de página - general */
 footer {
-    background-color: #c6cbc6; /* Verde más oscuro para el pie de página */
-    color: rgb(40, 43, 43);
+    background-color: #2c3e50;
+    color: #ecf0f1;
     text-align: center;
-    padding: 1rem;
-    margin-top: 2rem; 
-    position: fixed; /* Fija el pie de página en la parte inferior */
-    bottom: 0; 
-    width: 100%; /* Asegura que el pie de página ocupe todo el ancho */
-    font-size: 1rem;
+    padding: 2rem;
+    margin-top: 3rem; 
+    position: relative;
+    width: 100%;
+    bottom: 0;
 }
 
-/* Encabesado principal */
+.footer-content p {
+    margin: 0.3rem 0;
+}
+
+/* Encabezado principal */
 #titulo-blog {
-    font-size: 3.5rem; /* Tamaño grande para el título principal */
+    font-size: 5rem;
     text-align: center;
-    margin-top: 1rem;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 0;
+    font-family: 'Georgia', serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* --------- SEMANA 11 --------- */
-/* Estilos para el inventario */
+/* Estilos para el inventario (artículos del blog) */
 
+/* Grid de artículos con espacio generoso */
+.articulos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 5rem; /* Espacio generoso entre tarjetas */
+    padding: 2rem 0;
+    align-items: start; /* Alinea las tarjetas al inicio para evitar que se estiren */  
+    
+    margin-bottom: 4rem; /* Espacio extra al final para evitar solapamiento con el footer */
+    padding-bottom: 4rem; /* Asegura que el contenido no quede pegado al footer */
+}
+
+/* Tarjeta individual de artículo */
+.articulo-card {
+    background: #fff;
+    border: 1px solid #e1e8ed;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    
+    /* VITAL: Manejo de espacio */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Para que todas las tarjetas de una fila midan lo mismo */
+    
+    /* VITAL: Manejo de texto desbordado */
+    overflow-wrap: break-word; 
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+ /* Efecto hover para dar feedback visual */
+.articulo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+
+}
+
+.articulo-card h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.articulo-card h3 a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.articulo-card h3 a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* Meta información del artículo */
+.articulo-meta {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin: 0.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.articulo-contenido {
+    color: #555;
+    line-height: 1.6;
+    margin: 1rem 0;
+    overflow: hidden; /* Seguridad extra */
+    
+}
+
+/* Acciones del artículo */
+.articulo-acciones {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto; /* Empuja las acciones al final de la tarjeta */
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Tabla de artículos (alternativa) */
 table {
-    width: 50%;
+    width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 0.5rem;
-    text-align: center;
-}
-
-th {
-    background-color: #a3dea5; /* Verde para los encabezados de la tabla */
-    color: rgb(81, 78, 78);
-}
-
-.buscar-form {
-    margin-top: 3rem;
-    font-size: 1.6rem;
-    font-weight: 500;
-    font-style: normal;
-}
-
-.input-text {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.btn-buscar {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    background-color: #68aada; /* Verde para el botón de búsqueda */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn-buscar:hover {
-    background-color: #0056b3;
-}
-
-
-/* Estilos para el formulario de producto */
-.form-title {
-    color: #68aada; 
-    margin-bottom: 1rem;
+    border: 1px solid #e1e8ed;
+    padding: 12px;
     text-align: left;
 }
 
-.form-producto {
-    max-width: 400px;
-    margin-left: 0;
-    margin-right: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-.form-group { 
-    margin-bottom: 12px;
-}
-
-.form-label { 
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.form-input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-}
-
-.btn-submit {
-    background-color: #68aada;
+th {
+    background-color: #3498db;
     color: white;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Botones */
+.btn, .btn-submit, .btn-buscar {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover, .btn-submit:hover, .btn-buscar:hover {
+    background-color: #2980b9;
+}
+
+/* Botón editar */
+.btn-edit {
+    background-color: #f39c12;
+}
+
+.btn-edit:hover {
+    background-color: #d68910;
+}
+
+.btn btn-blog {
+    background-color: #3498db;
+    color: white;
+    
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+    background-color: #e74c3c;
+    color: white;
+    padding: 0.4rem 0.8rem;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    text-decoration: none;
+    font-size: 0.85rem;
 }
 
-.btn-submit:hover {
-    background-color: #0056b3;
+.btn-eliminar:hover {
+    background-color: #c0392b;
 }
 
+/* Formularios */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-input, .form-textarea {
+    padding: 0.75rem;
+    width: 100%;
+    max-width: 500px;
+    border: 2px solid #e1e8ed;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus, .form-textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Mensajes de error de validación */
+.errors {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    list-style-type: none;
+    padding: 0;
+}
+
+.errors li {
+    margin-bottom: 0.25rem;
+}
+
+/* Formulario de búsqueda */
+.buscar-form {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.input-text {
+    padding: 0.75rem;
+    border: 2px solid #e1e8ed;
+    border-radius: 5px;
+    width: 250px;
+    font-size: 1rem;
+}
+
+.input-text:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.btn-buscar {
+    padding: 0.75rem 1.5rem;
+    background-color: #3498db;
+}
+
+.btn-buscar:hover {
+    background-color: #2980b9;
+}
+
+/* Estilos para el artículo completo */
+.articulo-completo {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    
+}
+
+.articulo-contenido-completo {
+    line-height: 1.8;
+    color: #444;
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+}
+
+/* Sección de comentarios */
+.comentarios-lista {
+    margin-top: 1.5rem;
+}
+
+.comentario {
+    background: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0 5px 5px 0;
+}
+
+.comentario-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.comentario-meta strong {
+    color: #2c3e50;
+}
+
+.comentario-contenido {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Formulario de comentario */
+.form-comentario {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+/* Título del formulario */
+.form-title {
+    color: #2c3e50; 
+    margin-bottom: 1rem;
+}
+
+.form-producto {
+    max-width: 600px;
+    margin-left: 0;
+    margin-right: auto;
+    padding: 25px;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    background: #fafbfc;
+}
+
+/* Mensajes flash (éxito, error, etc.) */
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.flashes li {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flashes li[style*="error"], .flashes li[style*="warning"] {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+/*======= Estilos para la página de autores =========*/
+.autores-header {
+    margin-bottom: 2rem;
+}
+
+.autores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+/* Tarjeta individual de autor */
+.autor-card {
+    background: #fff;
+    border-left: 4px solid #3498db;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 10rem;
+}
+
+/* Efecto hover para dar feedback visual */
+.autor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Fila avatar + datos */
+.autor-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Círculo con inicial */
+.autor-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #3498db;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* Nombre y email */
+.autor-datos h3 {
+    margin: 0;
+    color: #1e1b4b;
+    font-size: 1rem;
+}
+
+/* Email en un tamaño más pequeño */
+.autor-datos small {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+/* Biografía */
+.autor-bio p {
+    color: #4b5563;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Estilo para autores sin biografía */
+.autor-bio .sin-bio {
+    color: #9ca3af;
+    font-style: italic;
+}
+
+/* Mensaje cuando no hay autores */
+.autores-vacio {
+    text-align: center;
+    padding: 2rem;
+    background: #f9fafb;
+    border-radius: 12px;
+    color: #9ca3af;
+    margin-top: 1rem;
+}
+
+/* Estilo para el mensaje de autores vacíos */
+.autores-vacio p:first-child { 
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Botón volver */
+.autores-footer {
+    margin-top: 2rem;
+
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .articulos-grid {
+        grid-template-columns: 1fr;
+        
+    }
+    
+    nav ul {
+        flex-direction: column;
+    }
+    
+    nav ul li a {
+        padding: 0.75rem;
+        text-align: center;
+    }
+    
+    main {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    #titulo-blog {
+        font-size: 2rem;
+    }
+}

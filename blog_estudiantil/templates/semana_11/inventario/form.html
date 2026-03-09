@@ -1,31 +1,93 @@
-<!-- página con herencia de base.html,
-muestra el formulario para agregar o editar un producto en el inventario,
-utilizando WTForms para generar los campos del formulario. --> 
+<!-- form.html - Página para publicar nuevo artículo en el Blog Estudiantil -->
+<!-- Hereda de base.html y muestra el formulario WTForms para crear artículos -->
 
 {% extends "semana_10/ediccion/base.html" %}
-{% block title %}Formulario Producto{% endblock %}
+<!-- Extiende la plantilla base para heredar su estructura -->
+
+{% block title %}Publicar Artículo{% endblock %}
+<!-- Define el título de la página en el navegador -->
+
 {% block content %}
-<h2 class="form-title">Formulario de Producto</h2>
+<!-- Inicio del bloque de contenido específico de esta página -->
+
+<h2 class="form-title">Publicar Nuevo Artículo en el Blog</h2>
+<!-- Título del formulario -->
+
+<p>Comparte tu conocimiento con la comunidad estudiantil. Escribe un artículo interesante y educativo.</p>
+<!-- Instrucciones para el usuario -->
+
 <form method="POST" class="form-producto">
+<!-- Formulario que envía datos por método POST al servidor -->
+
     {{ form.hidden_tag() }}
-    
-    <p class="form-group">
-        {{ form.nombre.label(class="form-label") }}
-        {{ form.nombre(class="form-input", size=20) }}
-    </p>
-    
-    <p class="form-group">
-        {{ form.cantidad.label(class="form-label") }}
-        {{ form.cantidad(class="form-input", size=20) }}
-    </p>
-    
-    <p class="form-group">
-        {{ form.precio.label(class="form-label") }}
-        {{ form.precio(class="form-input", size=20) }}
-    </p>
-    
-    <p class="form-group">
+    <!-- Genera el token CSRF oculto para seguridad -->
+
+    <div class="form-group">
+    <!-- Contenedor del campo de título -->
+        {{ form.titulo.label(class="form-label") }}
+        <!-- Etiqueta del campo título -->
+        {{ form.titulo(class="form-input") }}
+        <!-- Campo de entrada para el título del artículo -->
+        
+        {% if form.titulo.errors %}
+        <!-- Verifica si hay errores de validación en el título -->
+            <ul class="errors">
+                <!-- Lista de errores -->
+                {% for error in form.titulo.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+    <!-- Contenedor del campo de contenido -->
+        {{ form.contenido.label(class="form-label") }}
+        <!-- Etiqueta del campo contenido -->
+        {{ form.contenido(class="form-textarea", rows="10") }}
+        <!-- Área de texto para el contenido del artículo -->
+        
+        {% if form.contenido.errors %}
+        <!-- Verifica si hay errores de validación en el contenido -->
+            <ul class="errors">
+                {% for error in form.contenido.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+    <!-- Contenedor del campo de autor -->
+        {{ form.autor_id.label(class="form-label") }}
+        <!-- Etiqueta del campo autor_id -->
+        {{ form.autor_id(class="form-input", placeholder="Ingresa el ID del autor (opcional)") }}
+        <!-- Campo de entrada para el ID del autor -->
+        
+        {% if form.autor_id.errors %}
+        <!-- Verifica si hay errores de validación en el autor_id -->
+            <ul class="errors">
+                {% for error in form.autor_id.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+    <!-- Contenedor del botón de envío -->
         {{ form.submit(class="btn-submit") }}
-    </p>
+        <!-- Botón para enviar el formulario -->
+    </div>
+
 </form>
+<!-- Fin del formulario -->
+
+<div style="margin-top: 2rem;">
+<!-- Contenedor con margen superior para el enlace de vuelta -->
+    <a href="{{ url_for('ver_blog') }}" class="btn btn-blog">Volver al Blog</a>
+    <!-- Enlace para regresar a la página del blog -->
+</div>
+
 {% endblock %}
+<!-- Fin del bloque de contenido -->

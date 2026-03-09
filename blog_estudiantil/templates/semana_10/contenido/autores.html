@@ -1,0 +1,54 @@
+{% extends "semana_10/ediccion/base.html" %}
+
+{% block title %}Autores - Blog Estudiantil{% endblock %}
+
+{% block content %}
+
+<h2>Autores del Blog Estudiantil</h2>
+<p>Conoce a los autores que contribuyen con artículos y contenido educativo.</p>
+
+<div class="autores-header">
+    <p>¿Quieres unirte? 
+        <a href="{{ url_for('nuevo_autor') }}" class="btn">Regístrate aquí</a>
+    </p>
+</div>
+
+{% if autores %}
+    <div class="autores-grid">
+        {% for autor in autores %}
+        <div class="autor-card">
+            
+            <div class="autor-info">
+                <div class="autor-avatar">
+                    {{ autor.nombre[0].upper() }}
+                </div>
+                <div class="autor-datos">
+                    <h3>{{ autor.nombre }}</h3>
+                    <small>{{ autor.email }}</small>
+                </div>
+            </div>
+
+            <div class="autor-bio">
+                {% if autor.bio %}
+                    <p>{{ autor.bio[:120] }}{% if autor.bio|length > 120 %}...{% endif %}</p>
+                {% else %}
+                    <p class="sin-bio">Sin biografía aún.</p>
+                {% endif %}
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+{% else %}
+    <div class="autores-vacio">
+        <p>👤 Aún no hay autores registrados.</p>
+        <p>¡Sé el primero en unirte!</p>
+    </div>
+{% endif %}
+
+<div class="autores-footer">
+    <a href="{{ url_for('ver_blog') }}" class="btn">Volver al Blog</a>
+</div>
+
+{% endblock %}

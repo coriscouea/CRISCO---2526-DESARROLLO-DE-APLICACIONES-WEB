@@ -1,11 +1,26 @@
-<!-- página con herencia de base.html, 
-muestra el contenido específico de la página de acerca de mí.-->
+<!-- about.html - Página Acerca de del Blog Estudiantil -->
+<!-- Hereda de base.html y muestra información sobre el proyecto del blog -->
 
-{% extends "semana_10/ediccion/base.html" %}   
+{% extends "semana_10/ediccion/base.html" %}
+<!-- Extiende la plantilla base para heredar su estructura -->
 
-{% block title %} Acerca de mí - Mi Blog Estudiantil {% endblock %}
+{% block title %} Acerca de - Blog Estudiantil {% endblock %}
+<!-- Define el título de la página en el navegador -->
 
 {% block content %}
-    <h2>Sobre este blog</h2>
-    <p>Este blog fue creado para aprender Flask y Jinja2.</p>
+<!-- Inicio del bloque de contenido específico de esta página -->
+
+    <h2>Sobre el Blog Estudiantil</h2>
+    <!-- Título de la sección Acerca de -->
+
+    <p>Este blog fue creado para fomentar el intercambio de conocimientos y experiencias entre estudiantes universitarios.</p>
+    <!-- Descripción del propósito del blog -->
+
+    <p>Ofrecemos una plataforma de blogging completa desarrollada con tecnologías modernas como Flask, SQLite y Jinja2.</p>
+    <!-- Información sobre las tecnologías utilizadas -->
+
+    <p>Nuestro objetivo es proporcionar un espacio colaborativo donde los estudiantes puedan compartir artículos, tutoriales y consejos académicos.</p>
+    <!-- Objetivo del blog -->
+
 {% endblock %}
+<!-- Fin del bloque de contenido -->

@@ -1,11 +1,26 @@
-<!-- página con herencia de base.html, 
-muestra el contenido específico de la página de inicio.-->
+<!-- index.html - Página de inicio del Blog Estudiantil -->
+<!-- Hereda de base.html y muestra el contenido de la página principal -->
 
 {% extends "semana_10/ediccion/base.html" %}
+<!-- Extiende la plantilla base para heredar su estructura -->
 
-{% block title %} Inicio - Mi Blog Estudiantil {% endblock %}
+{% block title %} Inicio - Blog Estudiantil {% endblock %}
+<!-- Define el título de la página en el navegador -->
 
 {% block content %}
+<!-- Inicio del bloque de contenido específico de esta página -->
+
     <h2>Bienvenido al Blog Estudiantil</h2>
-    <p>Este es el contenido de la página de inicio. Aquí puedes encontrar las últimas noticias, artículos y productos relacionados con el mundo estudiantil.</p>
+    <!-- Título de bienvenida principal -->
+
+    <p>Este es un espacio dedicado al intercambio de conocimientos y experiencias entre estudiantes. Aquí encontrarás artículos, tutoriales, reseñas y consejos sobre temas académicos y tecnológicos.</p>
+    <!-- Descripción del propósito del blog -->
+
+    <p>Únete a nuestra comunidad de escritores y lectores. Comparte tu conocimiento y aprende de otros estudiantes.</p>
+    <!-- Invitación a unirse a la comunidad -->
+
+    <a href="{{ url_for('ver_blog') }}" class="btn">Ver Blog Completo</a>
+    <!-- Enlace al blog completo usando la función url_for de Flask -->
+
 {% endblock %}
+<!-- Fin del bloque de contenido -->
