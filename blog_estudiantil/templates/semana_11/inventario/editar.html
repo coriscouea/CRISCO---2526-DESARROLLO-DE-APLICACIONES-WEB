@@ -1,7 +1,10 @@
-<!-- editar.html - Página para editar un artículo existente en el Blog Estudiantil -->
 <!-- Hereda de base.html y muestra el formulario para modificar artículos -->
 
 {% extends "semana_10/ediccion/base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+{% endblock %}
 <!-- Extiende la plantilla base para heredar su estructura -->
 
 {% block title %}Editar Artículo{% endblock %}
@@ -16,12 +19,13 @@
 <p>Modifica la información del artículo seleccionado.</p>
 <!-- Instrucciones para el usuario -->
 
-<form method="POST">
+<form method="POST" action="{{ url_for('editar_articulo', id=articulo.id) }}">
 <!-- Formulario que envía datos por método POST al servidor -->
-
+    
     <div class="form-group">
     <!-- Contenedor del campo de ID (solo lectura) -->
         <label class="form-label" for="articulo_id">ID del Artículo:</label>
+      
         <!-- Etiqueta del campo ID -->
         <input type="text" id="articulo_id" value="{{ articulo.id }}" readonly class="form-input" style="background-color: #f5f5f5;">
         <!-- Campo que muestra el ID del artículo (solo lectura) -->
@@ -56,7 +60,7 @@
 <!-- Contenedor con margen superior para los enlaces de navegación -->
     <a href="{{ url_for('ver_articulo', id=articulo.id) }}" class="btn">Ver Artículo</a>
     <!-- Enlace para ver el artículo -->
-    <a href="{{ url_for('ver_blog') }}" class="btn">Volver al Blog</a>
+    <a href="{{ url_for('ver_blog') }}" class="btn btn-blog">Volver al Blog</a>
     <!-- Enlace para regresar al blog -->
 </div>
 

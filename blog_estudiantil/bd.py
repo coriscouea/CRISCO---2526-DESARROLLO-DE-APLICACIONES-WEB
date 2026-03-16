@@ -1,14 +1,12 @@
-# bd.py - Módulo de Base de Datos para el Blog Estudiantil
-# Gestiona la conexión y estructura de datos SQLite utilizando SQLAlchemy
-# Implementa funciones para inicializar la BD y crear sesiones persistentes
+# bd.py - Módulo de gestión de la base de datos para el Blog Estudiantil
 
-from semana_11.modelos import init_db as crear_tablas, crear_sesion, engine
+from Conexión.conexion import init_db as crear_tablas, crear_sesion, engine
 
 def crear_conexion():
-    """Crea y retorna una conexión a la base de datos SQLite del blog.
+    """Crea y retorna una conexión a la base de datos MySQL del blog.
 
     Retorna una sesión de SQLAlchemy para realizar operaciones en la BD.
-    Esta función mantiene compatibilidad con código existente que usaba sqlite3.
+    Esta función mantiene compatibilidad con código existente.
 
     Returns:
         Session: Sesión de SQLAlchemy conectada a la base de datos
@@ -20,7 +18,7 @@ def init_db():
 
     Utiliza SQLAlchemy para crear las tablas necesarias para el blog estudiantil:
     - autores: información de los autores
-    - articulos: artículos publicados
+    - artículos: artículos publicados
     - comentarios: comentarios en los artículos
 
     Se ejecuta automáticamente al iniciar la aplicación.
@@ -30,8 +28,5 @@ def init_db():
     
     # Crear todas las tablas
     crear_tablas()
-    
-    print("✓ Base de datos inicializada con SQLAlchemy")
-    print(f"  - Engine: {engine.url}")
-    print(f"  - Tablas creadas: autores, articulos, comentarios")
+
 

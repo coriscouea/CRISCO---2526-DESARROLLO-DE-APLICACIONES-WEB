@@ -1,6 +1,6 @@
 # blog.py - Módulo para la gestión del Blog Estudiantil
 # Define la clase Blog que utiliza SQLAlchemy para gestionar artículos, autores y comentarios
-# Implementa operaciones CRUD sincronizadas con la base de datos SQLite usando SQLAlchemy ORM
+# Implementa operaciones CRUD sincronizadas con la base de datos MySQL usando SQLAlchemy ORM
 
 from semana_11.modelos import Autor, Articulo, Comentario, crear_sesion
 from semana_11.articulo import Articulo as ArticuloOriginal
@@ -21,7 +21,7 @@ class Blog:
         self.comentarios = {}
 
     def cargar_desde_db(self):
-        """Carga todos los datos del blog desde la base de datos SQLite usando SQLAlchemy.
+        """Carga todos los datos del blog desde la base de datos MySQL usando SQLAlchemy.
 
         Carga artículos, autores y comentarios en los diccionarios en memoria.
         """

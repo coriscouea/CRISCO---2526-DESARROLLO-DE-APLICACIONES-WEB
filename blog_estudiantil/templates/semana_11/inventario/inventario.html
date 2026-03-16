@@ -2,6 +2,10 @@
 <!-- Hereda de base.html y muestra todos los artículos publicados con opciones de búsqueda -->
 
 {% extends "semana_10/ediccion/base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
 <!-- Extiende la plantilla base para heredar su estructura -->
 
 {% block title %}Blog Estudiantil{% endblock %}
@@ -43,10 +47,10 @@
 <div class="admin-actions" style="margin-top: 2rem; display: flex; gap: 10px;">
 <!-- Contenedor de enlaces adicionales con margen superior -->
 
-    <a href="{{ url_for('nuevo_articulo') }}" class="btn">📝 Publicar Nuevo Artículo</a>
+    <a href="{{ url_for('nuevo_articulo') }}" class="btn btn-publicar">📝 Publicar Nuevo Artículo</a>
     <!-- Enlace para publicar un nuevo artículo -->
 
-    <a href="{{ url_for('nuevo_autor') }}" class="btn">👤 Registrar Nuevo Autor</a>
+    <a href="{{ url_for('nuevo_autor') }}" class="btn btn-registrar">👤 Registrar Nuevo Autor</a>
     <!-- Enlace para registrar un nuevo autor -->
 
 </div>
@@ -80,10 +84,13 @@
 
         <div class="articulo-acciones">
         <!-- Contenedor de botones de acción -->
-            <a href="{{ url_for('ver_articulo', id=articulo.id) }}" class="btn">Ver Artículo</a>
+            <a href="{{ url_for('ver_articulo', id=articulo.id) }}" class="btn btn-ver">Ver Artículo</a>
             <!-- Botón para ver el artículo completo -->
             <a href="{{ url_for('editar_articulo', id=articulo.id) }}" class="btn btn-edit">Editar</a>
-            <!-- Botón para editar el artículo -->
+               <!-- Botón para editar el artículo -->
+            <A href="{{url_for('eliminar_articulo', id=articulo.id)}}" class="btn btn-delete" onclick="return confirm('¿Eliminar artículo?')">Eliminar</A>
+             <!-- Botón para eliminar el artículo con confirmación -->
+         
         </div>
 
     </article>

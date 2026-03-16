@@ -1,0 +1,169 @@
+/* Forms CSS - Formularios y botones para Blog Estudiantil */
+
+/* Botones */
+.btn-submit, .btn-buscar {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover, .btn-submit:hover, .btn-buscar:hover {
+    background-color: #2980b9;
+}
+
+.btn-edit {
+    background-color: #f39c12;
+}
+
+.btn-edit:hover {
+    background-color: #d68910;
+}
+
+.btn-blog {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+/*boton-registro*/
+
+.btn-registro {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+    margin-bottom: 2rem;
+    padding: 0.75rem 1.5rem;
+}
+
+.btn-eliminar {
+    background-color: #e74c3c;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.btn-eliminar:hover {
+    background-color: #c0392b;
+}
+
+/* Formularios */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-input, .form-textarea, .form-select {
+    padding: 0.75rem;
+    width: 100%;
+    max-width: 500px;
+    border: 2px solid #e1e8ed;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-title {
+    color: #2c3e50; 
+    margin-bottom: 1rem;
+}
+
+/* Mensajes de error */
+.errors {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    list-style-type: none;
+    padding: 0;
+}
+
+.errors li {
+    margin-bottom: 0.25rem;
+}
+
+/* Formulario de búsqueda */
+.buscar-form {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.input-text {
+    padding: 0.75rem;
+    border: 2px solid #e1e8ed;
+    border-radius: 5px;
+    width: 250px;
+    font-size: 1rem;
+}
+
+.input-text:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.btn.btn-blog {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn.btn-autores {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+

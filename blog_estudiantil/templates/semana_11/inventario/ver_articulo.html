@@ -2,6 +2,10 @@
 <!-- Hereda de base.html y muestra el artículo con sus comentarios -->
 
 {% extends "semana_10/ediccion/base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
 <!-- Extiende la plantilla base para heredar su estructura -->
 
 {% block title %}{{ articulo.titulo }}{% endblock %}
@@ -119,7 +123,7 @@
 
 <div style="margin-top: 2rem;">
 <!-- Contenedor con margen superior para el enlace de vuelta -->
-    <a href="{{ url_for('ver_blog') }}" class="btn btn-blog">⬅️ Volver al Blog</a>
+    <a href="{{ url_for('ver_blog') }}" class="btn btn-blog">Volver al Blog</a>
     <!-- Enlace para regresar a la página del blog -->
 </div>
 

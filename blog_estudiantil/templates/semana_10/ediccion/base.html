@@ -15,7 +15,10 @@
     <!-- Descripción de la página para motores de búsqueda -->
     <title>{% block title %} Blog Estudiantil{% endblock %}</title>
     <!-- Título de la página con bloque para sobreescribir en plantillas hijo -->
-    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+<!-- Enlaza la hoja de estilos CSS del directorio static -->
+
+{% block extra_css %}{% endblock %}
     <!-- Enlaza la hoja de estilos CSS del directorio static -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
     <!-- Define el icono (favicon) de la página -->

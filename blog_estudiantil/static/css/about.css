@@ -1,0 +1,109 @@
+/* Estilos para la página "Acerca de" del Blog Estudiantil */
+
+/* Tipografía y fondo general */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #333;
+    background: linear-gradient(135deg,#f5f7fa,#e4ecf7);
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.about-container{
+    max-width: 1100px;
+    margin: auto;
+    padding: 2rem;
+}
+
+/* Título principal */
+.intro {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #1f3c88;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Línea decorativa */
+.intro::after{
+    content:"";
+    display:block;
+    width:80px;
+    height:4px;
+    background:#3498db;
+    margin:10px auto;
+    border-radius:5px;
+}
+
+/* Texto descriptivo */
+.descripcion, .objetivo {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 750px;
+    margin: 0 auto 1.5rem;
+    text-align: center;
+    color: #555;
+}
+
+/* Tarjetas */
+.caracteristicas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 2.5rem auto;
+}
+
+/* Tarjeta individual */
+.caracteristicas li {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    transition: all .3s ease;
+    position: relative;
+}
+
+/* Icono decorativo */
+.caracteristicas li::before{
+    content:"📚";
+    font-size:1.8rem;
+    position:absolute;
+    top:-15px;
+    left:15px;
+}
+
+/* Hover */
+.caracteristicas li:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Imagen */
+img {
+    display: block;
+    margin: 2rem auto;
+    max-width: 70%;
+    border-radius: 14px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transition: transform .3s ease;
+}
+
+img:hover{
+    transform: scale(1.03);
+}
+
+/* Responsive */
+@media (max-width:768px){
+
+.intro{
+    font-size:1.9rem;
+}
+
+img{
+    max-width:90%;
+}
+
+}

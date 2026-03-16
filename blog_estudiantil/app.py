@@ -1,9 +1,10 @@
-# app.py - Aplicación Principal del Blog Estudiantil
-# Sistema de gestión de blog desarrollado con Flask (Semanas 9-11)
-# Implementa operaciones CRUD completas para artículos, autores y comentarios
-# Utiliza SQLite para persistencia de datos y WTForms para validación
+# app.py - Archivo principal de la aplicación Flask para el Blog Estudiantil
+# Configura rutas, maneja la lógica de negocio y conecta con la base de datos MySQL utilizando SQLAlchemy.
+# Implementa funcionalidades para publicar artículos, registrar autores, agregar comentarios y editar contenido.
+# Utiliza WTForms para formularios con validación y Jinja2 para renderizar plantillas HTML dinámicas.
 
 from flask import Flask, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from semana_11.form import ArticuloForm, AutorForm, ComentarioForm
 from semana_11.blog import Blog 
 from semana_11.articulo import Articulo
@@ -14,7 +15,6 @@ from bd import crear_conexion, init_db
 # Configuración de la aplicación Flask para Blog Estudiantil
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'blog_estudiantil_clave_segura_2026'  # Cambiar en producción
-
 
 #-----------SEMANA 10 - RUTAS BÁSICAS DEL BLOG-----------
 
@@ -31,14 +31,13 @@ def acerca_de():
 @app.route("/autores")
 def autores():
     """Página que muestra la lista de autores registrados en el blog estudiantil."""
-    from semana_11.modelos import Autor, crear_sesion
-    session = crear_sesion()
+    from semana_11.modelos import Autor
+    session = crear_conexion()
     try:
         lista = session.query(Autor).all()
     finally:
         session.close()
     return render_template("semana_10/contenido/autores.html", autores=lista)
-
 
 #-----------SEMANA 11 - GESTIÓN DEL BLOG ESTUDIANTIL-----------
 
@@ -57,11 +56,19 @@ def nuevo_articulo():
     """
     form = ArticuloForm()
     if form.validate_on_submit():
+        # Obtener el autor_id y convertirlo a entero
+        autor_id = int(form.autor_id.data)
+        
+        # Validar que se haya seleccionado un autor válido
+        if autor_id == 0:
+            flash("Debe seleccionar un autor válido", "error")
+            return render_template("semana_11/inventario/form.html", form=form)
+        
         # Crear instancia de artículo con datos del formulario
-        nuevo_articulo = Articulo(None, form.titulo.data, form.contenido.data, form.autor_id.data)
+        nuevo_articulo = Articulo(None, form.titulo.data, form.contenido.data, autor_id)
         # Publicar en BD y actualizar blog
         blog.publicar_articulo(nuevo_articulo)
-        flash(f"✓ Artículo publicado exitosamente: {nuevo_articulo.titulo}", "success")
+        flash(f"Artículo publicado exitosamente: {nuevo_articulo.titulo}", "success")
         return redirect(url_for('ver_blog'))
     return render_template("semana_11/inventario/form.html", form=form)
 
@@ -69,7 +76,7 @@ def nuevo_articulo():
 def ver_blog():
     """Muestra todos los artículos publicados en el blog estudiantil.
 
-    Carga todos los artículos de la BD SQLite y los muestra en la página principal del blog."""
+    Carga todos los artículos de la BD MySQL y los muestra en la página principal del blog."""
     # Cargar datos desde BD
     blog.cargar_desde_db()
     articulos = blog.mostrar_todos_articulos()
@@ -83,10 +90,10 @@ def ver_articulo(id):
         id: ID del artículo a mostrar
     """
     # Cargar datos desde BD
-    blog.cargar_desde_db()
+    blog.cargar_desde_db() # Asegura que los datos estén actualizados antes de obtener el artículo
     articulo = blog.obtener_articulo(id)
     if not articulo:
-        flash("⚠ Artículo no encontrado", "error")
+        flash("Artículo no encontrado", "error")
         return redirect(url_for('ver_blog'))
 
     comentarios = blog.obtener_comentarios_articulo(id)
@@ -94,6 +101,7 @@ def ver_articulo(id):
 
     return render_template('semana_11/inventario/ver_articulo.html',
                           articulo=articulo, comentarios=comentarios, autor=autor)
+
 
 @app.route('/buscar_articulo', methods=['POST'])
 def buscar_articulo():
@@ -103,10 +111,10 @@ def buscar_articulo():
     titulo = request.form.get('titulo', '')
     articulos = blog.buscar_articulos_por_titulo(titulo)
     if not articulos:
-        flash(f"⚠ No se encontraron artículos con '{titulo}'", "warning")
+        flash(f"No se encontraron artículos con '{titulo}'", "warning")
     return render_template('semana_11/inventario/inventario.html', articulos=articulos)
 
-@app.route('/nuevo_autor', methods=['GET', 'POST'])
+@app.route('/nuevo_autor', methods=["GET", "POST"])
 def nuevo_autor():
     """Formulario WTForms para registrar nuevos autores en el blog con validación.
 
@@ -119,9 +127,9 @@ def nuevo_autor():
         nuevo_autor = Autor(None, form.nombre.data, form.email.data, form.bio.data)
         # Registrar en BD y actualizar blog
         blog.agregar_autor(nuevo_autor)
-        flash(f"✓ Autor registrado exitosamente: {nuevo_autor.nombre}", "success")
-        return redirect(url_for('ver_blog'))
-    return render_template('semana_11/inventario/agregar.html', form=form)
+        flash(f"Autor registrado exitosamente: {nuevo_autor.nombre}", "success")
+        return redirect(url_for('autores'))
+    return render_template("semana_11/inventario/agregar.html", form=form)
 
 @app.route('/agregar_comentario', methods=['POST'])
 def agregar_comentario():
@@ -135,7 +143,7 @@ def agregar_comentario():
     # Crear y agregar comentario
     nuevo_comentario = Comentario(None, int(articulo_id), autor, contenido)
     blog.agregar_comentario(nuevo_comentario)
-    flash("✓ Comentario agregado exitosamente", "success")
+    flash("Comentario agregado exitosamente", "success")
     return redirect(url_for('ver_articulo', id=articulo_id))
 
 @app.route('/eliminar_comentario/<int:id>')
@@ -150,7 +158,7 @@ def eliminar_comentario(id):
     articulo_id = comentario.articulo_id if comentario else None
 
     blog.eliminar_comentario(id)
-    flash("✓ Comentario eliminado", "success")
+    flash("Comentario eliminado", "success")
     return redirect(url_for('ver_articulo', id=articulo_id) if articulo_id else url_for('ver_blog'))
 
 @app.route("/editar_articulo/<int:id>", methods=["GET", "POST"])
@@ -159,13 +167,13 @@ def editar_articulo(id):
 
     GET: Muestra formulario con datos actuales del artículo
     POST: Actualiza el artículo en BD usando SQLAlchemy"""
-    from semana_11.modelos import Articulo, crear_sesion
+    from semana_11.modelos import Articulo
     
     blog.cargar_desde_db()
     articulo = blog.obtener_articulo(id)
 
     if not articulo:
-        flash("⚠ Artículo no encontrado", "error")
+        flash("Artículo no encontrado", "error")
         return redirect(url_for("ver_blog"))
 
     if request.method == "POST":
@@ -173,7 +181,7 @@ def editar_articulo(id):
         contenido = request.form["contenido"]
 
         # Actualizar artículo usando SQLAlchemy
-        session = crear_sesion()
+        session = crear_conexion()
         try:
             articulo_db = session.query(Articulo).filter(Articulo.id == id).first()
             if articulo_db:
@@ -185,10 +193,10 @@ def editar_articulo(id):
             articulo.titulo = titulo
             articulo.contenido = contenido
             
-            flash("✓ Artículo actualizado correctamente", "success")
+            flash("Artículo actualizado correctamente", "success")
         except Exception as e:
             session.rollback()
-            flash(f"⚠ Error al actualizar: {str(e)}", "error")
+            flash(f"Error al actualizar: {str(e)}", "error")
         finally:
             session.close()
             
@@ -197,6 +205,99 @@ def editar_articulo(id):
     # GET: Mostrar formulario con datos actuales
     return render_template("semana_11/inventario/editar.html", articulo=articulo)
 
-# Punto de entrada de la aplicación
+@app.route("/editar_autor/<int:id>", methods=["GET", "POST"])
+def editar_autor(id):
+    """Edita los datos de un autor en el blog.
+
+    GET: Muestra formulario con datos actuales del autor
+    POST: Actualiza el autor en BD usando SQLAlchemy"""
+    from semana_11.modelos import Autor
+    
+    blog.cargar_desde_db()
+    autor = blog.obtener_autor(id)
+
+    if not autor:
+        flash("Autor no encontrado", "error")
+        return redirect(url_for("autores"))
+
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        email = request.form["email"]
+        bio = request.form["bio"] or None
+
+        # Actualizar autor usando SQLAlchemy
+        session = crear_conexion()
+        try:
+            autor_db = session.query(Autor).filter(Autor.id == id).first()
+            if autor_db:
+                autor_db.nombre = nombre
+                autor_db.email = email
+                autor_db.bio = bio
+                session.commit()
+            
+            # Actualizar en memoria
+            autor.nombre = nombre
+            autor.email = email
+            autor.bio = bio
+            
+            flash("Autor actualizado correctamente", "success")
+            blog.cargar_desde_db()
+        except Exception as e:
+            session.rollback()
+            flash(f"Error al actualizar: {str(e)}", "error")
+        finally:
+            session.close()
+            
+        return redirect(url_for("autores"))
+
+    # GET: Mostrar formulario con datos actuales
+    return render_template("semana_10/contenido/editar_autor.html", autor=autor)
+
+@app.route('/eliminar_autor/<int:id>')
+def eliminar_autor(id):
+    """Elimina un autor (cascade artículos)."""
+    
+    from semana_11.modelos import Autor
+    session = crear_conexion()
+
+    try:   
+        autor = session.query(Autor).filter(Autor.id == id).first()  
+        if autor:         
+            session.delete(autor)        
+            session.commit()         
+            flash('Autor eliminado', 'success')
+        else:   
+            flash('Autor no encontrado')
+    except Exception as e:
+        session.rollback()    
+        flash(f'Error: {str(e)}') 
+    finally:    
+        session.close()
+    return redirect(url_for('autores'))
+
+@app.route('/eliminar_articulo/<int:id>')
+def eliminar_articulo(id):
+    """Elimina un artículo del blog y su BD.
+
+    Args:
+        id: ID del artículo a eliminar"""
+    
+    from semana_11.modelos import Articulo
+    session = crear_conexion()
+    try:   
+        articulo = session.query(Articulo).filter(Articulo.id == id).first()  
+        if articulo:         
+            session.delete(articulo)        
+            session.commit()         
+            flash('Artículo eliminado', 'success')
+        else:   
+            flash('Artículo no encontrado')
+    except Exception as e:
+        session.rollback()    
+        flash(f'Error: {str(e)}') 
+    finally:    
+        session.close()
+    return redirect(url_for('ver_blog'))
+
 if __name__ == "__main__":
     app.run(debug=True)

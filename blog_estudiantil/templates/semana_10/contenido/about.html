@@ -4,23 +4,37 @@
 {% extends "semana_10/ediccion/base.html" %}
 <!-- Extiende la plantilla base para heredar su estructura -->
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
 {% block title %} Acerca de - Blog Estudiantil {% endblock %}
 <!-- Define el título de la página en el navegador -->
 
 {% block content %}
 <!-- Inicio del bloque de contenido específico de esta página -->
 
-    <h2>Sobre el Blog Estudiantil</h2>
-    <!-- Título de la sección Acerca de -->
+<div class="about-container">
 
-    <p>Este blog fue creado para fomentar el intercambio de conocimientos y experiencias entre estudiantes universitarios.</p>
-    <!-- Descripción del propósito del blog -->
+<h2 class="intro">Sobre el Blog Estudiantil</h2>
 
-    <p>Ofrecemos una plataforma de blogging completa desarrollada con tecnologías modernas como Flask, SQLite y Jinja2.</p>
-    <!-- Información sobre las tecnologías utilizadas -->
+<p class="descripcion">
+Este Blog fue creado para fomentar el intercambio de conocimientos y experiencias entre estudiantes universitarios.
+</p>
 
-    <p>Nuestro objetivo es proporcionar un espacio colaborativo donde los estudiantes puedan compartir artículos, tutoriales y consejos académicos.</p>
-    <!-- Objetivo del blog -->
+<ul class="caracteristicas">
+    <li>Una plataforma de blogging completa desarrollada con tecnologías modernas como Flask, SQLite y Jinja2.</li>
+    <li>Permite a los estudiantes publicar artículos, compartir ideas y colaborar en proyectos académicos.</li>
+    <li>Incluye funcionalidades como registro de autores, creación y edición de artículos y un sistema de comentarios.</li>
+</ul>
+
+<p class="objetivo">
+Nuestro objetivo es proporcionar un espacio colaborativo donde los estudiantes puedan compartir artículos, tutoriales y consejos académicos.
+</p>
+
+<img src="{{ url_for('static', filename='assets/img/blog.png') }}" alt="Imagen del Blog Estudiantil">
+
+</div>
 
 {% endblock %}
 <!-- Fin del bloque de contenido -->

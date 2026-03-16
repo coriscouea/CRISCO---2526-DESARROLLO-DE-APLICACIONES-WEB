@@ -1,10 +1,12 @@
-# modelos.py - Modelos SQLAlchemy para el Blog Estudiantil
-# Define las clases de modelo usando SQLAlchemy ORM para persistencia de datos
-# Proporciona una capa de abstracción sobre la base de datos SQLite
+# modelos.py - Definición de modelos SQLAlchemy para el Blog Estudiantil
+# Define las clases Autor, Articulo y Comentario como modelos de SQLAlchemy para la base
+# de datos MySQL del blog estudiantil. Cada clase representa una tabla en la base de datos
+# con sus respectivas columnas, relaciones y métodos de representación. También incluye
 
 from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from datetime import datetime
+from Conexión.conexion import init_db, crear_sesion
 
 # Crear base declarativa para los modelos
 Base = declarative_base()
@@ -100,36 +102,5 @@ class Comentario(Base):
         return f"Comentario(ID: {self.id}, Artículo: {self.articulo_id}, Autor: {self.autor})"
 
 
-# Configuración de la base de datos
-import os
-from pathlib import Path
 
-# Ruta de la base de datos
-db_path = Path(__file__).parent / "almacenamiento" / "blog.db"
-db_url = f'sqlite:///{db_path}'
-
-# Crear engine de SQLAlchemy
-engine = create_engine(db_url, echo=False)
-
-# Crear sesión
-Session = sessionmaker(bind=engine)
-
-
-def init_db():
-    """Inicializa la base de datos creando todas las tablas.
-    
-    Utiliza SQLAlchemy para crear las tablas automáticamente
-    si no existen en la base de datos SQLite.
-    """
-    db_path.parent.mkdir(parents=True, exist_ok=True)
-    Base.metadata.create_all(engine)
-
-
-def crear_sesion():
-    """Crea y retorna una nueva sesión de SQLAlchemy.
-    
-    Returns:
-        Session: Nueva sesión conectada a la base de datos
-    """
-    return Session()
 

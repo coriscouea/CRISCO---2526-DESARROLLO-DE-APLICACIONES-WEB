@@ -4,6 +4,12 @@
 {% extends "semana_10/ediccion/base.html" %}
 <!-- Extiende la plantilla base para heredar su estructura -->
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+{% endblock %}
+
 {% block title %} Inicio - Blog Estudiantil {% endblock %}
 <!-- Define el título de la página en el navegador -->
 
@@ -19,7 +25,7 @@
     <p>Únete a nuestra comunidad de escritores y lectores. Comparte tu conocimiento y aprende de otros estudiantes.</p>
     <!-- Invitación a unirse a la comunidad -->
 
-    <a href="{{ url_for('ver_blog') }}" class="btn">Ver Blog Completo</a>
+    <a href="{{ url_for('ver_blog') }}" class="btn btn-completo">Ver Blog Completo</a>
     <!-- Enlace al blog completo usando la función url_for de Flask -->
 
 {% endblock %}

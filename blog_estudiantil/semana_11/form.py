@@ -3,14 +3,25 @@
 # Implementa validación de campos para el blog estudiantil
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, IntegerField, EmailField
+from wtforms import StringField, TextAreaField, SubmitField, IntegerField, EmailField, SelectField
 from wtforms.validators import DataRequired, Length, Email, ValidationError, Optional, NumberRange
 
 # Importar modelos para validación de unicidad
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from semana_11.modelos import Autor, crear_sesion
+from semana_11.modelos import Autor
+from bd import crear_conexion as crear_sesion
+
+def obtener_opciones_autores():
+    """Obtiene la lista de autores para el formulario."""
+    session = crear_sesion()
+    try:
+        autores = session.query(Autor).all()
+        # Retorna lista de tuplas (id, nombre)
+        return [(0, '-- Seleccionar autor --')] + [(a.id, a.nombre) for a in autores]
+    finally:
+        session.close()
 
 class ArticuloForm(FlaskForm):
     """Formulario para crear/editar artículos en el blog estudiantil.
@@ -18,7 +29,7 @@ class ArticuloForm(FlaskForm):
     Utiliza WTForms para validación automática de datos:
     - Título: 5-100 caracteres requerido
     - Contenido: texto largo requerido (mínimo 50 caracteres)
-    - Autor ID: ID del autor (opcional para edición)
+    - Autor: Selección de autor de la lista
     """
 
     titulo = StringField(
@@ -35,11 +46,11 @@ class ArticuloForm(FlaskForm):
             Length(min=50, message='El contenido debe tener al menos 50 caracteres')
         ]
     )
-    autor_id = IntegerField(
-        'ID del Autor',
+    autor_id = SelectField(
+        'Autor',
+        choices=obtener_opciones_autores,
         validators=[
-            Optional(),
-            NumberRange(min=1, message='El ID del autor debe ser un número positivo')
+            DataRequired(message='Debe seleccionar un autor')
         ]
     )
     submit = SubmitField('Publicar Artículo')

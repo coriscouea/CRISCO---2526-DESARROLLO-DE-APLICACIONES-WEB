@@ -1,0 +1,199 @@
+/* Blog CSS - Estilos para páginas de blog/inventario */
+
+/* Grid de artículos */
+.articulos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 5rem;
+    padding: 2rem 0;
+    align-items: start;
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+}
+
+/* Tarjeta artículo */
+.articulo-card {
+    background: #fff;
+    border: 1px solid #e1e8ed;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.articulo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.articulo-card h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.articulo-card h3 a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.articulo-card h3 a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* Meta artículo -->
+.articulo-meta {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin: 0.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.articulo-contenido {
+    color: #555;
+    line-height: 1.6;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.articulo-acciones {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Tabla alternativa */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    border: 1px solid #e1e8ed;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Artículo completo */
+.articulo-completo {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.articulo-contenido-completo {
+    line-height: 1.8;
+    color: #444;
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+}
+
+.btn.btn-ver {
+    background-color: #a8d5ba;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn.btn-ver:hover {
+    background-color: #7fbf8c;
+}
+
+.btn.btn-edit {
+    background-color: #f7d9a8;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn.btn-edit:hover {
+    background-color: #d9b16a;
+}  
+
+/* boton eliminar */
+.btn.btn-delete {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #f7a8a8;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn.btn-delete:hover {
+    background: #d96a6a;
+}
+
+.btn.btn-publicar {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn.btn-publicar:hover {
+    background-color: #2980b9;
+}
+
+.btn.btn-registrar {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsive grid */
+@media (max-width: 768px) {
+    .articulos-grid {
+        grid-template-columns: 1fr;
+    }
+}

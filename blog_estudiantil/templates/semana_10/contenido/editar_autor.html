@@ -1,0 +1,48 @@
+<!-- Hereda de base.html y muestra el formulario para modificar autores -->
+
+{% extends "semana_10/ediccion/base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/autores.css') }}">
+{% endblock %}
+
+{% block title %}Editar Autor{% endblock %}
+
+{% block content %}
+
+<h2>Editar Autor del Blog</h2>
+<p>Modifica la información del autor seleccionado.</p>
+
+<form method="POST" action="{{ url_for('editar_autor', id=autor.id) }}">
+
+    <div class="form-group">
+        <label class="form-label" for="autor_id">ID del Autor:</label>
+        <input type="text" id="autor_id" value="{{ autor.id }}" readonly class="form-input" style="background-color: #f5f5f5;">
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" for="nombre">Nombre del Autor:</label>
+        <input type="text" id="nombre" name="nombre" value="{{ autor.nombre }}" class="form-input" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" for="email">Correo Electrónico:</label>
+        <input type="email" id="email" name="email" value="{{ autor.email }}" class="form-input" required>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" for="bio">Biografía:</label>
+        <textarea id="bio" name="bio" class="form-textarea" rows="5">{{ autor.bio or '' }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Actualizar Autor" class="btn-submit">
+    </div>
+
+</form>
+
+<div style="margin-top: 2rem;">
+    <a href="{{ url_for('autores') }}" class="btn ">Volver a Autores</a>
+</div>
+
+{% endblock %}

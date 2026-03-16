@@ -1,0 +1,26 @@
+/*Estilos para el Blog Estudiantil - Página de inicio */
+
+/* Tipografía y fondo general */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #333;
+    background: linear-gradient(135deg,#f5f7fa,#e4ecf7);
+    margin: 0;
+    padding: 0;
+}
+
+.btn.btn-completo {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+.btn.btn-completo:hover {
+    background-color: #2980b9;
+}

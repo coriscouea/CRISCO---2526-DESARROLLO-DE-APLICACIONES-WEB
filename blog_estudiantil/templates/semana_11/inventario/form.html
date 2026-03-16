@@ -2,6 +2,9 @@
 <!-- Hereda de base.html y muestra el formulario WTForms para crear artículos -->
 
 {% extends "semana_10/ediccion/base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
 <!-- Extiende la plantilla base para heredar su estructura -->
 
 {% block title %}Publicar Artículo{% endblock %}
@@ -61,8 +64,8 @@
     <!-- Contenedor del campo de autor -->
         {{ form.autor_id.label(class="form-label") }}
         <!-- Etiqueta del campo autor_id -->
-        {{ form.autor_id(class="form-input", placeholder="Ingresa el ID del autor (opcional)") }}
-        <!-- Campo de entrada para el ID del autor -->
+        {{ form.autor_id(class="form-select") }}
+        <!-- Lista desplegable para seleccionar el autor -->
         
         {% if form.autor_id.errors %}
         <!-- Verifica si hay errores de validación en el autor_id -->

@@ -2,6 +2,9 @@
 <!-- Hereda de base.html y muestra el formulario WTForms para registrar autores -->
 
 {% extends "semana_10/ediccion/base.html" %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
 <!-- Extiende la plantilla base para heredar su estructura -->
 
 {% block title %}Registrar Autor{% endblock %}
@@ -79,10 +82,10 @@
         <!-- Botón para enviar el formulario -->
     </div>
 <section style="margin-top: 3rem;">
-    <h2 class="form-title"></form>Autores Registrados</h2>
+<h2 class="form-title">Autores Registrados</h2>
 
     <p>Consulta la lista de autores que ya forman parte de nuestra comunidad.</p>
-    <a href="{{ url_for('autores') }}" class="btn">Ver Autores</a>
+    <a href="{{ url_for('autores') }}" class="btn btn-autores">Ver Autores</a>
     
 
 </section>
@@ -92,7 +95,7 @@
 
 <div style="margin-top: 2rem; display: flex; gap: 1rem;">
 <!-- Contenedor con margen superior para el enlace de vuelta -->
-    <a href="{{ url_for('ver_blog') }}" class="btn">Volver al Blog</a>
+    <a href="{{ url_for('ver_blog') }}" class="btn btn-blog">Volver al Blog</a>
     <!-- Enlace para regresar a la página del blog -->
 </div>
 
