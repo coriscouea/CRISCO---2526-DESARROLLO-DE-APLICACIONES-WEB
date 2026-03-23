@@ -31,4 +31,3 @@ def crear_sesion():
         Session: Nueva sesión conectada a la base de datos
     '''
     return Session()
-

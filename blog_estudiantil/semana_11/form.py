@@ -3,14 +3,14 @@
 # Implementa validación de campos para el blog estudiantil
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, IntegerField, EmailField, SelectField
+from wtforms import StringField, TextAreaField, SubmitField, IntegerField, EmailField, SelectField, PasswordField
 from wtforms.validators import DataRequired, Length, Email, ValidationError, Optional, NumberRange
 
 # Importar modelos para validación de unicidad
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from semana_11.modelos import Autor
+from semana_11.modelos import Autor, Usuario
 from bd import crear_conexion as crear_sesion
 
 def obtener_opciones_autores():
@@ -129,3 +129,44 @@ class ComentarioForm(FlaskForm):
     )
     submit = SubmitField('Publicar Comentario')
 
+class LoginForm(FlaskForm):
+    """Formulario para iniciar sesión."""
+    identifier = StringField('Usuario o Email', validators=[DataRequired(message="Campo requerido")])
+    password = PasswordField('Contraseña', validators=[DataRequired(message="Campo requerido")])
+    submit = SubmitField('Iniciar Sesión')
+
+    def validate_identifier(self,field):
+        from bd import verificar_credenciales
+
+        # Verifica usuario SIN contraseña aún
+        user = verificar_credenciales(field.data, self.password.data)
+        if not user:
+            raise ValidationError("Usuario o contraseña incorrectos")
+
+class RegisterForm(FlaskForm):
+    """Formulario para registrar usuario."""
+    usuario = StringField('Usuario', validators=[DataRequired(), Length(min=3, max=50)])
+    email = EmailField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Contraseña', validators=[DataRequired(), Length(min=6)])
+    repeat_password = PasswordField('Repetir Contraseña', validators=[DataRequired(), Length(min=6)])
+    submit = SubmitField('Registrar')
+
+    def validate_usuario(self, field):
+        session = crear_sesion()
+        try:
+            if session.query(Usuario).filter_by(usuario=field.data).first():
+                raise ValidationError('Usuario ya existe')
+        finally:
+            session.close()
+
+    def validate_email(self, field):
+        session = crear_sesion()
+        try:
+            if session.query(Usuario).filter_by(email=field.data).first():
+                raise ValidationError('Email ya registrado')
+        finally:
+            session.close()
+
+    def validate_repeat_password(self, field):
+        if field.data != self.password.data:
+            raise ValidationError('Las contraseñas no coinciden')

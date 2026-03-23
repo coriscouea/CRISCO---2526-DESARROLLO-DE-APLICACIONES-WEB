@@ -26,12 +26,33 @@
 </head>
 <!-- Cierra la sección head -->
 <body>
+
+<div class="top-bar">
+
+    {% if current_user.is_authenticated %}
+
+        <span>Bienvenido, {{ current_user.usuario }}</span> 
+        <a href="{{url_for('logout')}}">Cerrar Sesión</a>
+
+    {% else %}
+
+        <a href="{{url_for('login')}}">Iniciar Sesión</a>
+        <a href="{{url_for('register')}}">Registrarse</a>
+    
+    {% endif %}
+</div>  
+
+
+</div>
     <!-- Inicio del cuerpo de la página -->
     <header class="container text-center my-4">
         <!-- Encabezado de la página con clases de estilo -->
+
         <h1 id="titulo-blog" class="display-4"> 
-        <i class="fa-solid fa-book"></i>     Blog Estudiantil</h1>
+            <i class="fa-solid fa-book"></i>     Blog Estudiantil
+        </h1>
         <!-- Título principal del blog -->
+
         <p class="tagline">Compartiendo conocimiento entre estudiantes</p>
         <!-- Subtítulo o eslogan del blog -->
     </header>
@@ -49,8 +70,12 @@
             <!-- Enlace a la página de autores -->
             <li><a href="{{url_for('acerca_de')}}">Acerca de</a></li>
             <!-- Enlace a la página Acerca de -->
-            <li><a href="{{url_for('nuevo_articulo')}}">Publicar Artículo</a></li>
-            <!-- Enlace a la página para publicar artículos -->
+             
+            {% if current_user.is_authenticated %}
+                <li><a href="{{url_for('nuevo_articulo')}}">Publicar Artículo</a></li>
+                <li><a href="{{url_for('nuevo_autor')}}">Nuevo Autor</a></li>
+            {%endif%}
+
         </ul>
     </nav>
     <!-- Cierra la navegación -->
@@ -90,4 +115,3 @@
 <!-- Cierra el cuerpo del documento -->
 </html>
 <!-- Cierra el documento HTML -->
-

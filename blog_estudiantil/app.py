@@ -5,16 +5,57 @@
 
 from flask import Flask, render_template, request, redirect, url_for, flash
 from sqlalchemy import text
-from semana_11.form import ArticuloForm, AutorForm, ComentarioForm
+from semana_11.form import ArticuloForm, AutorForm, ComentarioForm, LoginForm, RegisterForm
 from semana_11.blog import Blog 
 from semana_11.articulo import Articulo
 from semana_11.autor import Autor
 from semana_11.comentario import Comentario
-from bd import crear_conexion, init_db
+from bd import crear_conexion, init_db, get_usuario_by_id, verificar_credenciales, crear_usuario
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from werkzeug.security import generate_password_hash
 
 # Configuración de la aplicación Flask para Blog Estudiantil
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'blog_estudiantil_clave_segura_2026'  # Cambiar en producción
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return get_usuario_by_id(int(user_id))
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('ver_blog'))
+    form = RegisterForm()
+    if form.validate_on_submit():
+        password_hash = generate_password_hash(form.password.data)
+        if crear_usuario(form.usuario.data, form.email.data, password_hash):
+            flash('Registro exitoso. Por favor inicia sesión.', 'success')
+            return redirect(url_for('login'))
+        flash('Error al registrar usuario.', 'error')
+    return render_template('auth/register.html', form=form)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('ver_blog'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = verificar_credenciales(form.identifier.data, form.password.data)
+        login_user(user)
+        return redirect(url_for('ver_blog'))
+    return render_template('auth/login.html', form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Sesión cerrada.', 'info')
+    return redirect(url_for('inicio'))
 
 #-----------SEMANA 10 - RUTAS BÁSICAS DEL BLOG-----------
 
@@ -48,6 +89,7 @@ init_db()
 blog = Blog()
 
 @app.route("/nuevo_articulo", methods=["GET", "POST"])
+@login_required 
 def nuevo_articulo():
     """Formulario WTForms para publicar artículos en el blog con validación.
 
@@ -115,6 +157,7 @@ def buscar_articulo():
     return render_template('semana_11/inventario/inventario.html', articulos=articulos)
 
 @app.route('/nuevo_autor', methods=["GET", "POST"])
+@login_required
 def nuevo_autor():
     """Formulario WTForms para registrar nuevos autores en el blog con validación.
 
@@ -147,6 +190,7 @@ def agregar_comentario():
     return redirect(url_for('ver_articulo', id=articulo_id))
 
 @app.route('/eliminar_comentario/<int:id>')
+@login_required
 def eliminar_comentario(id):
     """Elimina un comentario del blog y su BD.
 
@@ -161,7 +205,9 @@ def eliminar_comentario(id):
     flash("Comentario eliminado", "success")
     return redirect(url_for('ver_articulo', id=articulo_id) if articulo_id else url_for('ver_blog'))
 
+
 @app.route("/editar_articulo/<int:id>", methods=["GET", "POST"])
+@login_required
 def editar_articulo(id):
     """Edita los datos de un artículo en el blog.
 
@@ -205,7 +251,9 @@ def editar_articulo(id):
     # GET: Mostrar formulario con datos actuales
     return render_template("semana_11/inventario/editar.html", articulo=articulo)
 
+
 @app.route("/editar_autor/<int:id>", methods=["GET", "POST"])
+@login_required
 def editar_autor(id):
     """Edita los datos de un autor en el blog.
 
@@ -254,6 +302,7 @@ def editar_autor(id):
     return render_template("semana_10/contenido/editar_autor.html", autor=autor)
 
 @app.route('/eliminar_autor/<int:id>')
+@login_required
 def eliminar_autor(id):
     """Elimina un autor (cascade artículos)."""
     
@@ -275,7 +324,8 @@ def eliminar_autor(id):
         session.close()
     return redirect(url_for('autores'))
 
-@app.route('/eliminar_articulo/<int:id>')
+@app.route('/eliminar_articulo/<int:id>', methods=['POST'])
+@login_required
 def eliminar_articulo(id):
     """Elimina un artículo del blog y su BD.
 

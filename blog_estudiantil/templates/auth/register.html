@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Registro - Blog Estudiantil</title>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registro.css') }}">
+</head>
+<body>
+
+<div class="register-container">
+
+    <div class="register-card">
+        <h2 class="register-title">Registro de Usuario</h2>
+
+        <!-- Mensajes -->
+         <div class="register-messages">
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        
+                        <div class="alert alert-{{ 'danger' if category == 'error' else category }}">
+                            {{ message }}
+                        </div>
+                    
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- Formulario -->
+        <form method="POST" class="register-form">
+
+            {{ form.hidden_tag() }} 
+
+            <div class="form-group">
+                {{ form.usuario.label(class="form-label") }} 
+                {{ form.usuario(class="form-input") }}
+                
+                {% for error in form.usuario.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+
+            </div>
+
+            <div class="form-group">
+                {{ form.email.label(class="form-label") }} 
+                {{ form.email(class="form-input") }}
+
+                {% for error in form.email.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label(class="form-label") }} 
+                {{ form.password(class="form-input") }}
+
+                {% for error in form.password.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+
+            </div>
+
+            <div class="form-group">
+                {{ form.repeat_password.label(class="form-label") }} 
+                {{ form.repeat_password(class="form-input") }}
+
+                {% for error in form.repeat_password.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+
+            </div>
+            
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary btn-full") }}
+            </div>
+
+        </form>
+
+        <div class="register-footer">
+            <p>¿Ya tienes cuenta?</p>
+            <a href="{{ url_for('login') }}" class="link-login">
+            Inicia sesión aquí
+            </a>
+    
+        </div>
+    
+    </div>
+
+</div>
+</body>
+</html>

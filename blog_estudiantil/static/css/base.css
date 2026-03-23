@@ -1,5 +1,28 @@
 /* Base CSS - Global layout for Blog Estudiantil */
 
+/* /* Barra superior */
+.top-bar {
+    background-color: #1e293b;
+    color: white;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    font-size: 14px;
+}
+
+/* Links */
+
+.top-bar a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.top-bar a:hover {
+    text-decoration: underline;
+}
+
+
 /* Fuente y colores generales */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -129,6 +152,7 @@ footer {
     color: #721c24;
     border-color: #f5c6cb;
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {

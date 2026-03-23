@@ -74,4 +74,3 @@ class Articulo:
     def __repr__(self):
         """Retorna una representación técnica del artículo."""
         return f"Articulo({self.id}, '{self.titulo}', autor_id={self.autor_id})"
-

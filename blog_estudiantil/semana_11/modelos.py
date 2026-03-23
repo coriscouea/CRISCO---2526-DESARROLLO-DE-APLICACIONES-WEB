@@ -7,6 +7,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, F
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from datetime import datetime
 from Conexión.conexion import init_db, crear_sesion
+from flask_login import UserMixin
 
 # Crear base declarativa para los modelos
 Base = declarative_base()
@@ -101,6 +102,24 @@ class Comentario(Base):
     def __str__(self):
         return f"Comentario(ID: {self.id}, Artículo: {self.articulo_id}, Autor: {self.autor})"
 
+class Usuario(Base, UserMixin):
+    """Modelo SQLAlchemy para la tabla de usuarios del sistema de autenticación."""
+    __tablename__ = 'usuario'
+
+    id_usuario = Column(Integer, primary_key=True)
+    usuario = Column(String(50), nullable=False, unique=True)
+    email = Column(String(120), nullable=False, unique=True)
+    password = Column(String(255), nullable=False)
+    fecha_registro = Column(DateTime, default=datetime.now)
+
+    def get_id(self):
+        return str(self.id_usuario)
+
+    def __repr__(self):
+        return f'<Usuario {self.usuario}>'
+
+    def __str__(self):
+        return f"Usuario(ID: {self.id_usuario}, {self.usuario}, {self.email})"
 
 
 

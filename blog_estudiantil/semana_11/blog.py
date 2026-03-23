@@ -256,4 +256,3 @@ class Blog:
             raise e
         finally:
             session.close()
-

@@ -1,10 +1,10 @@
-# Mi Página Web - Tarea Semana 12
+# Mi Página Web - Tarea Semana 14
 
 📌 Descripción
 
-Persistencia con SQLite utilizando SQLAlchemy
+Implementación de un sistema de login con flask
 
-**python, Entorno virtual, Flask, jinja2, SQLite3, CSS, SQLAlchemy**.
+**python, Entorno virtual, Flask, jinja2, SQLite3, CSS, SQLAlchemy, Flask-Login **.
 
 Ejemplo de Salida:
 
@@ -17,4 +17,8 @@ http://127.0.0.1:5000/autores
 http://127.0.0.1:5000/about
 
 http://127.0.0.1:5000/nuevo_articulo
+
+http://127.0.0.1:5000/nuevo_autor
+
+http://127.0.0.1:5000/login
 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Iniciar Sesión - Blog Estudiantil</title>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+<div class="login-container">
+
+    <div class="login-card">
+
+        <h2 class="login-title">Iniciar Sesión</h2>
+
+        <!-- Mensajes flash -->
+        <div class="login-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        
+                        <div class="alert alert-{{ 'danger' if category == 'error' else category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- Formulario -->
+        <form method="POST" class="login-form">
+            {{ form.hidden_tag() }}
+           
+            <div class="form-group">
+                {{ form.identifier.label(class="form-label") }}
+                {{ form.identifier(class="form-control") }}
+
+                {% for error in form.identifier.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label(class="form-label") }} 
+                {{ form.password(class="form-control") }}
+
+                {% for error in form.password.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}    
+            </div>
+
+            <div class="form-group">
+            {{ form.submit(class="btn btn-primary btn-full") }}
+            </div>
+        </form>
+
+        <!-- Registro -->
+        <div class="login-footer">
+            <p>¿No tienes cuenta? Regístrate</p>
+
+            <a href="{{ url_for('register') }}" class="link-register"> 
+            Registrate aquí
+            </a>
+
+        </div>
+
+    </div>
+
+</div>    
+</body>
+</html>
