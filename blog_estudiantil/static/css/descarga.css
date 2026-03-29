@@ -45,29 +45,6 @@ h2 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* BOTONES */
-.descarga-opciones {
-    margin-top: 20px;
-}
-
-.btn.btn-completo {
-    display: block;
-    width: 300px;
-    margin: 10px auto;
-    background-color: #3498db;
-    color: white;
-    padding: 0.9rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-
-.btn.btn-completo:hover {
-    background-color: #2980b9;
-    transform: translateY(-3px);
-}
 
 /* SECCIÓN */
 .recent-posts {
