@@ -1,0 +1,132 @@
+<!-- =========================================
+     NUEVO_AUTOR.HTML - REGISTRO DE AUTORES
+========================================= -->
+
+<!-- Hereda la estructura base del sistema -->
+{% extends "semana_10/ediccion/base.html" %}
+
+<!-- Carga de estilos específicos -->
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms_nuevo_autor.css') }}">
+{% endblock %}
+
+<!-- Título en la pestaña -->
+{% block title %}Registrar Autor{% endblock %}
+
+{% block content %}
+<!-- Inicio del contenido -->
+
+<div class="nuevo-container">
+
+    <!-- Título principal -->
+    <h2 class="form-title">Registrar Nuevo Autor en el Blog</h2>
+
+    <!-- Descripción motivacional -->
+    <p class="descripcion">
+        Únete a nuestra comunidad de escritores estudiantiles. 
+        Registra tu información para empezar a publicar artículos.
+    </p>
+
+</div>
+
+<!-- =========================================
+     FORMULARIO DE REGISTRO
+========================================= -->
+
+<form method="POST" class="form-producto">
+<!-- Formulario que envía datos al servidor -->
+
+    {{ form.hidden_tag() }}
+    <!-- Token de seguridad CSRF -->
+
+    <!-- =========================================
+         CAMPO: NOMBRE
+    ========================================= -->
+    <div class="form-group">
+
+        {{ form.nombre.label(class="form-label") }}
+        <!-- Etiqueta del campo nombre -->
+
+        {{ form.nombre(class="form-input") }}
+        <!-- Input para el nombre -->
+
+        {% if form.nombre.errors %}
+        <!-- Mostrar errores -->
+            <ul class="errors">
+                {% for error in form.nombre.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+
+    <!-- =========================================
+         CAMPO: EMAIL
+    ========================================= -->
+    <div class="form-group">
+
+        {{ form.email.label(class="form-label") }}
+        <!-- Etiqueta del campo email -->
+
+        {{ form.email(class="form-input") }}
+        <!-- Input para correo -->
+
+        {% if form.email.errors %}
+            <ul class="errors">
+                {% for error in form.email.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+
+    <!-- =========================================
+         CAMPO: BIOGRAFÍA
+    ========================================= -->
+    <div class="form-group">
+
+        {{ form.bio.label(class="form-label") }}
+        <!-- Etiqueta del campo bio -->
+
+        {{ form.bio(class="form-textarea", rows="4") }}
+        <!-- Área de texto -->
+
+        {% if form.bio.errors %}
+            <ul class="errors">
+                {% for error in form.bio.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+
+    <!-- =========================================
+         BOTÓN DE ENVÍO
+    ========================================= -->
+    <div class="form-group">
+
+        {{ form.submit(class="btn-submit") }}
+        <!-- Botón registrar -->
+
+    </div>
+
+</form>
+
+<!-- =========================================
+     BOTÓN DE NAVEGACIÓN
+========================================= -->
+
+<div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+    
+    <!-- Regresar al blog -->
+    <a href="{{ url_for('ver_blog') }}" class="btn btn-blog">
+        Volver al Blog
+    </a>
+
+</div>
+
+{% endblock %}
+<!-- Fin del contenido -->

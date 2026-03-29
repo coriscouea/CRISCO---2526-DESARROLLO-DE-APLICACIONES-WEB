@@ -35,7 +35,9 @@ def get_usuario_by_id(user_id):
     """Obtiene usuario por ID para Flask-Login user_loader."""
     session = crear_sesion()
     try:
-        usuario = session.query(Usuario).get(user_id)
+        usuario = session.query(Usuario).get(user_id) 
+        """Consulta por ID: Es la forma más rápida de buscar un registro único."""
+        
         return usuario
     finally:
         session.close()
@@ -49,7 +51,11 @@ def crear_usuario(usuario, email, password_hash):
         session.commit()
         return nuevo_usuario
     except Exception:
+
         session.rollback()
+        """Seguridad de Datos: Si algo falla al crear un usuario, el rollback()
+        deshace los cambios a medias, evitando datos corruptos."""
+
         return None
     finally:
         session.close()
@@ -61,6 +67,9 @@ def verificar_credenciales(identifier, password):
         usuario = session.query(Usuario).filter(
             (Usuario.usuario == identifier) | (Usuario.email == identifier)
         ).first()
+        """Operador OR: Permite al estudiante loguearse con su 
+        nombre de usuario o con su correo."""
+
         if usuario and check_password_hash(usuario.password, password):
             return usuario
         return None

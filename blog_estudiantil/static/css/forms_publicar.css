@@ -1,0 +1,175 @@
+/* =========================================
+   ESTILOS GENERALES - FORMULARIOS
+========================================= */
+
+/* Configuración global de la página */
+body {
+    font-family: 'Open Sans', Arial, sans-serif; /* Tipografía principal */
+    color: #333; /* Color base del texto */
+    background: linear-gradient(135deg,#f5f7fa,#e4ecf7); /* Fondo degradado */
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+
+/* Contenedor que centra el contenido del formulario */
+.form-container{
+    max-width: 1100px;
+    margin: auto;
+    padding: 1rem;
+}
+
+/* =========================================
+   TEXTO DESTACADO
+========================================= */
+
+/* Estilo tipo badge para descripciones */
+.descripcion, .objetivo {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    text-align: center;
+
+    background: linear-gradient(90deg, #3498db, #6dd5fa);
+    color: white;
+
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1.5rem auto;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+
+/* Botones principales (submit y búsqueda) */
+.btn-submit, .btn-buscar {
+    background-color: #3498db;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto hover para botones */
+.btn:hover, .btn-submit:hover, .btn-buscar:hover {
+    background-color: #2980b9;
+}
+
+/* Botón editar */
+.btn-edit {
+    background-color: #f39c12;
+}
+
+.btn-edit:hover {
+    background-color: #d68910;
+}
+
+/* Botón volver al blog */
+.btn-blog {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+}
+
+/* Botón de registro */
+.btn-registro {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+    background-color: #e74c3c;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.btn-eliminar:hover {
+    background-color: #c0392b;
+}
+
+/* =========================================
+   FORMULARIOS
+========================================= */
+
+/* Contenedor de cada campo */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+/* Inputs, textarea y select */
+.form-input, .form-textarea, .form-select {
+    padding: 0.75rem;
+    width: 100%;
+    max-width: 500px;
+    border: 2px solid #e1e8ed;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+/* Efecto al enfocar campos */
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Área de texto */
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Etiquetas */
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Título del formulario */
+.form-title {
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #3498db;
+    text-align: center;
+}
+
+/* =========================================
+   MENSAJES DE ERROR
+========================================= */
+
+/* Lista de errores */
+.errors {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    list-style-type: none;
+    padding: 0;
+}
+
+.errors li {
+    margin-bottom: 0.25rem;
+}

@@ -1,0 +1,242 @@
+/* =========================================
+   VARIABLES DE DISEÑO (REUTILIZABLES)
+========================================= */
+
+:root {
+    --color-primario: #3498db;   /* Azul principal */
+    --color-exito: #2ecc71;      /* Verde para acciones positivas */
+    --color-texto: #ffff;      /* Color de texto principal */
+    --color-borde: #dcdde1;      /* Bordes suaves */
+    --sombra-suave: 0 10px 25px rgba(0, 0, 0, 0.05); /* Sombra ligera */
+}
+
+/* =========================================
+   CONFIGURACIÓN GLOBAL
+========================================= */
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #333;
+    background: linear-gradient(135deg,#f5f7fa,#e4ecf7);
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+
+.contenedor-edicion {
+    max-width: 900px;        /* Ancho cómodo para lectura */
+    margin: 2rem auto;       /* Centrado horizontal y separación vertical */
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 15px;     /* Bordes modernos */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-radius: 10px;
+
+}
+
+/* =========================================
+   TÍTULOS Y TEXTOS
+========================================= */
+
+.titulo-seccion {
+    font-size: 2rem;
+    color: var(--color-texto);
+    margin-bottom: 0.5rem;
+}
+
+.subtitulo {
+    color: #ffffff;
+    margin-bottom: 2.5rem;
+}
+
+/* =========================================
+   CAMPOS DEL FORMULARIO
+========================================= */
+
+.grupo-campo {
+    margin-bottom: 2rem; /* Espaciado entre inputs */
+}
+
+/* Etiquetas del formulario */
+.etiqueta-form {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #2c3e50;
+
+    margin-bottom: 0.4rem;   /* Separación con el input */
+    letter-spacing: 0.5px;   /* Mejora lectura */
+}
+
+/* Espaciado del bloque completo */
+.grupo-campo {
+    margin-bottom: 2.2rem; /* Más aire entre campos */
+}
+
+/* Inputs y textarea */
+.input-texto {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border: 2px solid var(--color-borde);
+    border-radius: 8px;
+    font-family: inherit;
+    text-align: justify;
+    line-height: 1.8;
+    font-size: 1.15rem;
+}
+
+.input-area {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 1rem; 
+    border: 2px solid var(--color-borde);
+    border-radius: 8px;
+    font-family: inherit;
+    text-align: justify;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #34495e;
+}
+
+/* =========================================
+   INPUT DE SOLO LECTURA (ID)
+========================================= */
+
+.input-fijo {
+    display: flex;
+    align-items: center;
+    background: #f1f2f6;
+    border-radius: 8px;
+    padding-left: 1rem;
+}
+
+/* Input bloqueado */
+.input-fijo input {
+    background: transparent;
+    border: none;
+    padding: 1rem;
+    color: #95a5a6;
+    font-weight: bold;
+    cursor: not-allowed;
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+
+/* Contenedor de botones */
+.acciones-form {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+/* Botón principal */
+.btn-principal {
+    flex: 2;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Botón guardar */
+.btn-guardar {
+    background-color: var(--color-exito);
+    color: white;
+}
+
+/* Hover guardar */
+.btn-guardar:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+/* Botón secundario (cancelar) */
+.btn-secundario {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+    background: #ecf0f1;
+    color: #7f8c8d;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+/* Hover cancelar */
+.btn-secundario:hover {
+    background: #bdc3c7;
+    color: white;
+}
+
+/* =========================================
+   ENCABEZADO DEL FORMULARIO
+========================================= */
+
+.encabezado-form {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+/* =========================================
+   PREFIJO (# DEL ID)
+========================================= */
+
+.prefijo {
+    font-weight: bold;
+    color: #7f8c8d;
+    margin-right: 5px;
+}
+
+
+/* =========================================
+   TEXTO DE AYUDA
+========================================= */
+
+.ayuda-texto {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: #95a5a6;
+    font-style: italic;
+}
+
+/* =========================================
+   EFECTO FOCUS
+========================================= */
+
+.input-texto:focus,
+.input-area:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+
+/* =========================================
+   ENLACE RETORNO
+========================================= */
+
+.enlace-retorno {
+    display: inline-block;
+    margin-top: 2rem;
+    color: var(--color-primario);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s
+}
+
+.enlace-retorno:hover {
+    color: #2980b9;
+    transform: translateX(-5px);
+}

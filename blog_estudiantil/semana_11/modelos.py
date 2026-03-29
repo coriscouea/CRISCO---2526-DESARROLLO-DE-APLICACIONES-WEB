@@ -11,6 +11,8 @@ from flask_login import UserMixin
 
 # Crear base declarativa para los modelos
 Base = declarative_base()
+"""La Base: Es la clase de la que va heredar todos los modelos 
+para que SQLAlchemy sepa que son tablas de base de datos."""
 
 class Autor(Base):
     """Modelo SQLAlchemy para la tabla de autores del blog estudiantil.
@@ -31,11 +33,18 @@ class Autor(Base):
     bio = Column(Text, nullable=True)
     fecha_registro = Column(DateTime, default=datetime.now)
     
+
     # Relación uno a muchos con artículos
     articulos = relationship('Articulo', back_populates='autor', cascade='all, delete-orphan')
+    """Efecto Cascada: Si se elimina un Autor, 
+    automáticamente se borrarán todos sus artículos. Esto evita 
+    "datos huérfanos" en la BD."""
+
     
     def __repr__(self):
         return f'<Autor {self.nombre}>'
+    """Representación: Útil para depuración. Si se hace un print(autor) 
+    en la consola, verás <Autor Cesar> en lugar de un código de memoria hexadecimal."""
     
     def __str__(self):
         return f"Autor(ID: {self.id}, Nombre: {self.nombre}, Email: {self.email})"
@@ -58,7 +67,11 @@ class Articulo(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     titulo = Column(String(200), nullable=False)
     contenido = Column(Text, nullable=False)
+
     autor_id = Column(Integer, ForeignKey('autores.id'), nullable=False)
+    """Llave Foránea: Crea el vínculo físico entre 
+    la tabla artículos y la tabla autores."""
+
     fecha_publicacion = Column(DateTime, default=datetime.now)
     
     # Relación muchos a uno con autor
@@ -103,6 +116,10 @@ class Comentario(Base):
         return f"Comentario(ID: {self.id}, Artículo: {self.articulo_id}, Autor: {self.autor})"
 
 class Usuario(Base, UserMixin):
+    """Autenticación: Al heredar de UserMixin, le otorgas
+    a la clase métodos necesarios para flask-login como 
+    is_authenticated o is_active."""
+
     """Modelo SQLAlchemy para la tabla de usuarios del sistema de autenticación."""
     __tablename__ = 'usuario'
 

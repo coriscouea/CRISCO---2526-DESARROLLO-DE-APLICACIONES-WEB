@@ -1,6 +1,7 @@
-/* Estilos para la página "Acerca de" del Blog Estudiantil */
+/* =========================================
+   ESTILOS GENERALES - PÁGINA ABOUT
+========================================= */
 
-/* Tipografía y fondo general */
 body {
     font-family: 'Open Sans', Arial, sans-serif;
     color: #333;
@@ -9,101 +10,318 @@ body {
     padding: 0;
 }
 
-/* Contenedor principal */
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+
 .about-container{
     max-width: 1100px;
     margin: auto;
-    padding: 2rem;
+    padding: 1rem;
+    
 }
 
-/* Título principal */
+/* =========================================
+   TÍTULO PRINCIPAL
+========================================= */
+
 .intro {
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: #1f3c88;
+    font-size: 3rem; /* Tamaño grande */
+    color: #2c3e50;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #3498db; /* Línea decorativa */
     text-align: center;
-    margin-bottom: 1rem;
 }
 
-/* Línea decorativa */
-.intro::after{
-    content:"";
-    display:block;
-    width:80px;
-    height:4px;
-    background:#3498db;
-    margin:10px auto;
-    border-radius:5px;
-}
 
-/* Texto descriptivo */
-.descripcion, .objetivo {
+/* =========================================
+   DESCRIPCIÓN DESTACADA
+========================================= */
+
+.descripcion {
     font-size: 1.1rem;
     line-height: 1.7;
-    max-width: 750px;
-    margin: 0 auto 1.5rem;
     text-align: center;
-    color: #555;
+
+    background: linear-gradient(90deg, #3498db, #6dd5fa);
+    color: white;
+
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+
+    display: block;
+    width: fit-content;
+    margin: 0 auto 2rem auto;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* Tarjetas */
+/* =========================================
+   CARDS CON IMAGEN DE FONDO
+========================================= */
+
 .caracteristicas {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
     gap: 1.5rem;
     list-style: none;
     padding: 0;
-    margin: 2.5rem auto;
+    margin: 2rem auto;
 }
 
-/* Tarjeta individual */
+/* Tarjetas */
 .caracteristicas li {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-    transition: all .3s ease;
     position: relative;
+    border-radius: 16px;
+    padding: 1.5rem;
+    color: white;
+
+    background-size: cover;
+    background-position: center;
+
+    min-height: 200px;
+
+    display: flex;
+    align-items: flex-end;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
 }
 
-/* Icono decorativo */
-.caracteristicas li::before{
-    content:"📚";
-    font-size:1.8rem;
-    position:absolute;
-    top:-15px;
-    left:15px;
+/* Capa oscura bien aplicada (NO tapa el texto) */
+.caracteristicas li::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1;
 }
 
-/* Hover */
+/* Texto por encima */
+.caracteristicas li {
+    z-index: 2;
+}
+
+/* Mejorar legibilidad */
+.caracteristicas li {
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* Hover elegante */
 .caracteristicas li:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transform: scale(1.03);
 }
 
-/* Imagen */
+/* =========================================
+   IMÁGENES 4K POR CARD
+========================================= */
+
+.card-tech {
+    background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000');
+}
+
+.card-study {
+    background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2000');
+}
+
+.card-community {
+    background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2000');
+}
+
+/* =========================================
+   OBJETIVO
+========================================= */
+
+.objetivo {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 750px;
+    margin: 2rem auto;
+    text-align: center;
+    color: #444;
+
+    padding: 1rem;
+    border-left: 4px solid #3498db;
+    background: #f9fbfd;
+    border-radius: 8px;
+}
+
+/* =========================================
+   IMAGEN FINAL
+========================================= */
+
 img {
     display: block;
     margin: 2rem auto;
-    max-width: 70%;
+    max-width: 60%;
     border-radius: 14px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
     transition: transform .3s ease;
 }
 
+/* Efecto hover imagen */
 img:hover{
     transform: scale(1.03);
 }
 
-/* Responsive */
+/* =========================================
+   VALORACIONES
+========================================= */
+
+.valoraciones {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.valoraciones h3 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+.reviews {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 1.5rem;
+}
+
+.review-card {
+    background: white;
+    padding: 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+}
+
+.review-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.review-card span {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+/* =========================================
+   TAGS
+========================================= */
+
+.tags {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.tag-list span {
+    background: #3498db;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    transition: background 0.3s ease;
+}
+
+.tag-list span:hover {
+    background: #2980b9;
+}
+
+/* =========================================
+   REDES SOCIALES
+========================================= */
+
+.redes {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    text-decoration: none;
+    padding: 10px 15px;
+    background: #2c3e50;
+    color: white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #3498db;
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   REDES SOCIALES 
+========================================= */
+
+.social-links a {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    font-size: 1.3rem;
+
+    color: white !important; /* fuerza color del icono */
+    text-decoration: none;
+
+    transition: all 0.3s ease;
+}
+
+/* Forzar colores oficiales */
+.social-links a.facebook {
+    background: #1877f2 !important;
+}
+
+.social-links a.instagram {
+    background: #e4405f !important;
+}
+
+.social-links a.linkedin {
+    background: #0077b5 !important;
+}
+
+
+/* Hover */
+.social-links a:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
 @media (max-width:768px){
 
-.intro{
-    font-size:1.9rem;
-}
+    .intro{
+        font-size:1.9rem;
+    }
 
-img{
-    max-width:90%;
-}
+    img{
+        max-width:90%;
+    }
 
 }

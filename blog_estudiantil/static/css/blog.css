@@ -1,199 +1,323 @@
-/* Blog CSS - Estilos para páginas de blog/inventario */
+/* =========================================
+   ESTILOS GENERALES - BLOG
+========================================= */
 
-/* Grid de artículos */
+/* Configuración base del sitio */
+body {
+    font-family: 'Open Sans', Arial, sans-serif; /* Tipografía principal */
+    color: #333; /* Color base del texto */
+    background: linear-gradient(135deg,#f5f7fa,#e4ecf7); /* Fondo degradado */
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+
+/* Contenedor superior del blog */
+.blog-container {
+    max-width: 1100px;
+    margin: auto; /* Centrado horizontal */
+    padding: 1rem;
+}
+
+/* =========================================
+   DESCRIPCIÓN DESTACADA
+========================================= */
+
+/* Texto tipo badge moderno */
+.descripcion {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    text-align: center;
+
+    background: linear-gradient(90deg, #3498db, #6dd5fa);
+    color: white;
+
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1.5rem auto;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* =========================================
+   TÍTULO PRINCIPAL
+========================================= */
+
+h2 {
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #3498db;
+    text-align: center;
+}
+
+/* =========================================
+   FORMULARIO DE BÚSQUEDA
+========================================= */
+
+/* Contenedor del formulario */
+.buscar-form {
+    max-width: 600px;
+    margin: 2.5rem 0 2.5rem 0;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Formulario a la izquierda */
+.buscar-form form {
+    order: 1;
+}
+
+/* Imagen a la derecha */
+.logo-titulo {
+    width: 250px;
+    height: 150px;
+    order: 2;
+}
+
+/* Título del buscador */
+.busqueda {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+/* Etiqueta */
+.buscar-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* Campo de entrada */
+.input-text {
+    width: 80%;
+    padding: 0.7rem 1rem;
+    border: 2px solid #3498db;
+    border-radius: 25px;
+    outline: none;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Efecto al enfocar */
+.input-text:focus {
+    border-color: #2980b9;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+}
+
+/* Texto placeholder */
+.input-text::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* Botón buscar */
+.btn-buscar {
+    background-color: #3498db;
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* Hover botón */
+.btn-buscar:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   ACCIONES ADMIN (BOTONES SUPERIORES)
+========================================= */
+
+.btn.btn-publicar,
+.btn.btn-registrar {
+    background-color: #2980b9; /* Color azul */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease;
+
+    /* Mejora visual */
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Hover botones */
+.btn.btn-publicar:hover,
+.btn.btn-registrar:hover {
+    background-color: #2980b9;
+}
+
+.admin-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    gap: 15px;
+}
+
+/* =========================================
+   GRID DE ARTÍCULOS
+========================================= */
+
 .articulos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 5rem;
     padding: 2rem 0;
-    align-items: start;
-    margin-bottom: 4rem;
+    align-items: start; 
+    margin-bottom: 4rem; 
     padding-bottom: 4rem;
 }
 
-/* Tarjeta artículo */
+/* =========================================
+   TARJETAS DE ARTÍCULOS
+========================================= */
+
 .articulo-card {
     background: #fff;
     border: 1px solid #e1e8ed;
     border-radius: 12px;
     padding: 1.5rem;
+
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+    /* Layout flexible */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
+    height: 100%; 
+    overflow-wrap: break-word; 
+    word-wrap: break-word; 
+    word-break: break-word; 
     hyphens: auto;
+    
+
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Hover tarjeta */
 .articulo-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-.articulo-card h3 {
-    margin-top: 0;
-    color: #2c3e50;
-}
-
+/* Título del artículo */
 .articulo-card h3 a {
     color: #3498db;
     text-decoration: none;
 }
 
+/* Hover título */
 .articulo-card h3 a:hover {
     color: #2980b9;
     text-decoration: underline;
 }
 
-/* Meta artículo -->
+/* =========================================
+   METADATOS
+========================================= */
+
 .articulo-meta {
     font-size: 0.85rem;
-    color: #7f8c8d;
-    margin: 0.5rem 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    color: #777;
+    margin-bottom: 10px;
 }
+
+/* =========================================
+   CONTENIDO PREVIEW
+========================================= */
 
 .articulo-contenido {
-    color: #555;
-    line-height: 1.6;
-    margin: 1rem 0;
-    overflow: hidden;
+    font-size: 0.95rem;
+    color: #444;
+    color: #4b5563;
+    font-size: 0.95rem;
+    margin: 0.5rem 0 0 0;
+    line-height: 2;
+    text-align: justify;
+    max-width: 90%;
+    margin: 0.5rem auto 0 auto;
+
 }
+
+/* Enlace leer más */
+.read-more {
+    color: #3498db;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* =========================================
+   BOTONES DE ACCIÓN
+========================================= */
 
 .articulo-acciones {
+    margin-top: auto; /* Fija los botones al final */
     display: flex;
     gap: 0.5rem;
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid #f0f0f0;
 }
 
-/* Tabla alternativa */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-th, td {
-    border: 1px solid #e1e8ed;
-    padding: 12px;
-    text-align: left;
-}
-
-th {
-    background-color: #3498db;
-    color: white;
-    font-weight: 600;
-}
-
-tr:hover {
-    background-color: #f8f9fa;
-}
-
-/* Artículo completo */
-.articulo-completo {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-}
-
-.articulo-contenido-completo {
-    line-height: 1.8;
-    color: #444;
-    font-size: 1.05rem;
-    margin-top: 1.5rem;
-}
-
+/* Botón ver */
 .btn.btn-ver {
     background-color: #a8d5ba;
     color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.95rem;
-    transition: background-color 0.3s ease;
 }
 
-.btn.btn-ver:hover {
-    background-color: #7fbf8c;
-}
-
+/* Botón editar */
 .btn.btn-edit {
     background-color: #f7d9a8;
     color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.95rem;
-    transition: background-color 0.3s ease;
 }
 
-.btn.btn-edit:hover {
-    background-color: #d9b16a;
-}  
-
-/* boton eliminar */
+/* Botón eliminar */
 .btn.btn-delete {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
     background: #f7a8a8;
     color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s ease;
-}
-
-.btn.btn-delete:hover {
-    background: #d96a6a;
-}
-
-.btn.btn-publicar {
-    background-color: #3498db;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.95rem;
-    transition: background-color 0.3s ease;
 }
 
-.btn.btn-publicar:hover {
-    background-color: #2980b9;
-}
+/* =========================================
+   RESPONSIVE
+========================================= */
 
-.btn.btn-registrar {
-    background-color: #3498db;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.95rem;
-    transition: background-color 0.3s ease;
-}
-
-/* Responsive grid */
 @media (max-width: 768px) {
     .articulos-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Una sola columna en móviles */
+    }
+
+    .input-text {
+        width: 100%;
     }
 }

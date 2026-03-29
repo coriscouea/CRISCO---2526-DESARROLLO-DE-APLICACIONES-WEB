@@ -3,25 +3,35 @@
 
 <!DOCTYPE html>
 <!-- Define el tipo de documento como HTML5 -->
+
 <html lang="es">
 <!-- Inicia el documento HTML con idioma español -->
+
 <head>
     <!-- Sección de metadatos y configuración de la página -->
+
     <meta charset = "UTF-8">
     <!-- Define la codificación de caracteres como UTF-8 -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Configura la página para ser responsive en dispositivos móviles -->
+     
     <meta name="description" content="Blog Estudiantil - Comparte conocimientos y experiencias académicas">
     <!-- Descripción de la página para motores de búsqueda -->
+   
     <title>{% block title %} Blog Estudiantil{% endblock %}</title>
     <!-- Título de la página con bloque para sobreescribir en plantillas hijo -->
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 <!-- Enlaza la hoja de estilos CSS del directorio static -->
 
+    <!-- Define el icono localmente de la página -->
+    <link rel="icon" type="imagen/png" href="static/assets/img/titulo1.png">
+
 {% block extra_css %}{% endblock %}
     <!-- Enlaza la hoja de estilos CSS del directorio static -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
-    <!-- Define el icono (favicon) de la página -->
+    
+
     
 </head>
 <!-- Cierra la sección head -->
@@ -49,7 +59,7 @@
         <!-- Encabezado de la página con clases de estilo -->
 
         <h1 id="titulo-blog" class="display-4"> 
-            <i class="fa-solid fa-book"></i>     Blog Estudiantil
+            Blog Estudiantil
         </h1>
         <!-- Título principal del blog -->
 
@@ -64,16 +74,19 @@
             <!-- Lista de enlaces de navegación -->
             <li><a href="{{url_for('inicio')}}">Inicio</a></li>
             <!-- Enlace a la página de inicio -->
+            <li><a href="{{url_for('acerca_de')}}">Acerca de</a></li>
+            <!-- Enlace a la página Acerca de -->
+
             <li><a href="{{url_for('ver_blog')}}">Blog</a></li>
             <!-- Enlace a la página del blog -->
             <li><a href="{{url_for('autores')}}">Autores</a></li>
             <!-- Enlace a la página de autores -->
-            <li><a href="{{url_for('acerca_de')}}">Acerca de</a></li>
-            <!-- Enlace a la página Acerca de -->
+
              
             {% if current_user.is_authenticated %}
                 <li><a href="{{url_for('nuevo_articulo')}}">Publicar Artículo</a></li>
                 <li><a href="{{url_for('nuevo_autor')}}">Nuevo Autor</a></li>
+                <li><a href="{{url_for('descarga')}}">Reporte</a></li>
             {%endif%}
 
         </ul>

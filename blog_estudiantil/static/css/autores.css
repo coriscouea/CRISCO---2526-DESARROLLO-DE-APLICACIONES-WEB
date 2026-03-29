@@ -1,42 +1,114 @@
-/* Autores CSS - Estilos específicos para página de autores */
+/* ================================
+   ESTILOS GENERALES
+================================ */
 
-/* Header autores */
-.autores-header {
-    margin-bottom: 2rem;
+/* Tipografía y fondo general */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #333;
+    background: linear-gradient(135deg,#f5f7fa,#e4ecf7);
+    margin: 0;
+    padding: 0;
 }
 
-/* Grid autores */
+/* Texto descriptivo */
+.descripcion {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 750px;
+    margin: 0 auto 1.5rem;
+    text-align: center;
+    color: #2c3e50;
+    background: linear-gradient(90deg, #3498db, #6dd5fa);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Título principal */
+h2 {
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #3498db;
+    text-align: center;
+}
+
+
+
+/* ================================
+   HEADER
+================================ */
+
+.autores-header {
+    margin-bottom: 2rem;
+    max-width: 1100px;
+    margin: auto;
+    padding: 1.5rem;
+    max-width: 1100px;
+    margin: auto; /* Centrado horizontal */
+    padding: 1rem;
+    
+}
+
+/* ================================
+   GRID DE AUTORES (RESPONSIVE)
+================================ */
+
 .autores-grid {
     display: grid;
+
+    /* Se adapta automáticamente al tamaño de pantalla */
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2rem;
     margin-top: 1.5rem;
 }
 
-/* Tarjeta autor */
+/* ================================
+   TARJETAS DE AUTOR
+================================ */
+
 .autor-card {
     background: #fff;
-    border-left: 4px solid #3498db;
+    border-left: 4px solid #3498db; /* borde azul en card autores*/
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    /* Animación suave */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
+
+
 }
 
+/* Efecto al pasar el mouse */
 .autor-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Avatar + info */
+/* ================================
+   INFORMACIÓN DEL AUTOR
+================================ */
+
 .autor-info {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
+/* Avatar circular con inicial */
 .autor-avatar {
     width: 50px;
     height: 50px;
@@ -51,31 +123,44 @@
     flex-shrink: 0;
 }
 
+/* Nombre del autor */
 .autor-datos h3 {
     margin: 0;
-    color: #1e1b4b;
+    color: #0f0f11;
     font-size: 1.2rem;
 }
 
+/* Email */
 .autor-datos small {
     color: #6b7280;
     font-size: 0.9rem;
 }
 
-/* Bio */
+/* ================================
+   BIOGRAFÍA
+================================ */
+
 .autor-bio p {
     color: #4b5563;
     font-size: 0.95rem;
     margin: 0.5rem 0 0 0;
-    line-height: 1.5;
+    line-height: 2;
+    text-align: justify;
+    max-width: 90%;
+    margin: 0.5rem auto 0 auto;
+
 }
 
+/* Texto cuando no hay biografía */
 .autor-bio .sin-bio {
     color: #9ca3af;
     font-style: italic;
 }
 
-/* Vacio */
+/* ================================
+   ESTADO VACÍO
+================================ */
+
 .autores-vacio {
     text-align: center;
     padding: 2rem;
@@ -85,18 +170,38 @@
     margin-top: 1rem;
 }
 
-.autores-vacio p:first-child { 
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+/* =========================================
+   BLOQUE ¿QUIERES UNIRTE?
+========================================= */
+
+.quieres-unirte {
+    margin-top: 1.5rem;
+    text-align: left;
+
+    font-size: 1rem;
+    color: #555;
+
 }
 
-/* Footer autores */
-.autores-footer {
-    margin-top: 2rem;
+/* Texto destacado */
+.quieres-unirte strong {
+    color: #2c3e50;
+    font-weight: 600;
 }
 
-/* boton registro */
-.btn-registro { 
+/* Espaciado del botón */
+.quieres-unirte .btn-registro {
+    margin-left: 8px;
+}
+
+
+
+/* ================================
+   BOTONES
+================================ */
+
+/* Botón de registro y navegación */
+.btn-registro, .btn-blog {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     background: #3498db;
@@ -107,46 +212,32 @@
     transition: background 0.3s ease;
 }
 
-.btn-blog {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #3498db;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s ease;
-}
-
-/* boton editar */
+/* Botón editar */
 .btn.btn-edit {
-    display: inline-block;
     padding: 0.5rem 1rem;
     background: #f7d9a8;
     color: white;
     border-radius: 8px;
-    text-decoration: none;
     font-weight: 600;
-    transition: background 0.3s ease;
+    display: inline-block;
 }
 
+/* Hover editar */
 .btn.btn-edit:hover {
     background: #d9b16a;
 }
 
-/* boton eliminar */
+/* Botón eliminar */
 .btn.btn-delete {
-    display: inline-block;
     padding: 0.5rem 1rem;
     background: #f7a8a8;
     color: white;
     border-radius: 8px;
-    text-decoration: none;
     font-weight: 600;
-    transition: background 0.3s ease;
+    display: inline-block;
 }
 
+/* Hover eliminar */
 .btn.btn-delete:hover {
     background: #d96a6a;
 }
-    

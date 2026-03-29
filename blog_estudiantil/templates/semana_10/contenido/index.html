@@ -1,32 +1,107 @@
-<!-- index.html - Página de inicio del Blog Estudiantil -->
-<!-- Hereda de base.html y muestra el contenido de la página principal -->
+<!-- =========================================
+     INDEX.HTML - PÁGINA PRINCIPAL
+========================================= -->
 
+<!-- Hereda la estructura base del sistema -->
 {% extends "semana_10/ediccion/base.html" %}
-<!-- Extiende la plantilla base para heredar su estructura -->
 
+<!-- Carga de estilos específicos -->
 {% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-
 {% endblock %}
 
+<!-- Título de la pestaña del navegador -->
 {% block title %} Inicio - Blog Estudiantil {% endblock %}
-<!-- Define el título de la página en el navegador -->
 
 {% block content %}
-<!-- Inicio del bloque de contenido específico de esta página -->
+<!-- Inicio del contenido principal -->
 
-    <h2>Bienvenido al Blog Estudiantil</h2>
-    <!-- Título de bienvenida principal -->
+<div class="index-container">
+    
+    <!-- Título de bienvenida -->
+    <h2>Bienvenidos</h2>
 
-    <p>Este es un espacio dedicado al intercambio de conocimientos y experiencias entre estudiantes. Aquí encontrarás artículos, tutoriales, reseñas y consejos sobre temas académicos y tecnológicos.</p>
     <!-- Descripción del propósito del blog -->
+    <p class="descripcion">
+        Intercambio de conocimientos y experiencias entre estudiantes del futuro
+    </p>
 
-    <p>Únete a nuestra comunidad de escritores y lectores. Comparte tu conocimiento y aprende de otros estudiantes.</p>
-    <!-- Invitación a unirse a la comunidad -->
+    <!-- Botón que redirige al listado completo de artículos -->
+    <a href="{{ url_for('ver_blog') }}" class="btn btn-completo">
+        Ver Blog Completo
+    </a>
 
-    <a href="{{ url_for('ver_blog') }}" class="btn btn-completo">Ver Blog Completo</a>
-    <!-- Enlace al blog completo usando la función url_for de Flask -->
+</div>
+
+<!-- =========================================
+     SECCIÓN DE PUBLICACIONES RECIENTES
+========================================= -->
+
+<section class="recent-posts">
+
+    <!-- Título de sección -->
+    <h3 class="section-title">Publicaciones Recientes</h3>
+
+    <!-- Contenedor en formato grid -->
+    <div class="post-grid">
+
+        <!-- Tarjeta 1 -->
+        <article class="post-card">
+            <div class="post-image">
+                <!-- Imagen representativa -->
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400" alt="Programación">
+                
+                <!-- Categoría -->
+                <span class="category">Tecnología</span>
+            </div>
+
+            <div class="post-body">
+                <h4>Introducción a Python</h4>
+                <p>Aprende las bases del lenguaje más popular para ciencia de datos y web...</p>
+
+                <!-- Enlace al blog -->
+                <a href="{{ url_for('ver_blog') }}" class="read-more">
+                    Leer más →
+                </a>
+            </div>
+        </article>
+
+        <!-- Tarjeta 2 -->
+        <article class="post-card">
+            <div class="post-image">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400" alt="Estudio">
+                <span class="category">Académico</span>
+            </div>
+
+            <div class="post-body">
+                <h4>Tips de Organización</h4>
+                <p>Cómo gestionar tu tiempo en época de exámenes sin morir en el intento...</p>
+
+                <a href="{{ url_for('ver_blog') }}" class="read-more">
+                    Leer más →
+                </a>
+            </div>
+        </article>
+
+        <!-- Tarjeta 3 -->
+        <article class="post-card">
+            <div class="post-image">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400" alt="Seguridad">
+                <span class="category">Seguridad</span>
+            </div>
+
+            <div class="post-body">
+                <h4>Ciberseguridad 101</h4>
+                <p>Protege tus cuentas y datos personales con estos consejos básicos...</p>
+
+                <a href="{{ url_for('ver_blog') }}" class="read-more">
+                    Leer más →
+                </a>
+            </div>
+        </article>
+
+    </div>
+</section>
 
 {% endblock %}
-<!-- Fin del bloque de contenido -->
+<!-- Fin del contenido -->

@@ -1,26 +1,189 @@
-/*Estilos para el Blog Estudiantil - Página de inicio */
+/* =========================================
+   ESTILOS GENERALES - BLOG ESTUDIANTIL
+========================================= */
 
-/* Tipografía y fondo general */
+/* Configuración global del sitio */
 body {
-    font-family: 'Open Sans', Arial, sans-serif;
-    color: #333;
-    background: linear-gradient(135deg,#f5f7fa,#e4ecf7);
+    font-family: 'Open Sans', Arial, sans-serif; /* Tipografía principal */
+    color: #333; /* Color de texto base */
+    background: linear-gradient(135deg,#f5f7fa,#e4ecf7); /* Fondo degradado */
     margin: 0;
     padding: 0;
 }
 
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+
+/* Contenedor central de la página */
+.index-container{
+    max-width: 1100px; /* Ancho máximo */
+    margin: auto; /* Centrado horizontal */
+    padding: 1rem; /* Espaciado interno */
+}
+
+/* =========================================
+   BOTÓN PRINCIPAL
+========================================= */
+
+/* Botón para acceder al blog completo */
 .btn.btn-completo {
-    background-color: #3498db;
+    background-color: #3498db; /* Color azul */
     color: white;
     padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 5px; /* Bordes redondeados */
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
     font-size: 0.95rem;
     transition: background-color 0.3s ease;
+    
+    /* Mejora visual */
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
+
+/* Efecto hover del botón */
 .btn.btn-completo:hover {
     background-color: #2980b9;
 }
+
+/* =========================================
+   TEXTO DESTACADO (DESCRIPCIÓN)
+========================================= */
+
+/* Estilo tipo “badge” para descripción y objetivo */
+.descripcion, .objetivo {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    text-align: center;
+
+    /* Fondo llamativo */
+    background: linear-gradient(90deg, #3498db, #6dd5fa);
+    color: white;
+
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+
+    /* Centrado del bloque */
+    display: block;
+    width: fit-content;
+    margin: 0 auto 1.5rem auto;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* =========================================
+   TÍTULOS
+========================================= */
+
+h2 {
+    font-size: 3rem; /* Tamaño grande */
+    color: #2c3e50;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #3498db; /* Línea decorativa */
+    text-align: center;
+}
+
+/* =========================================
+   SECCIÓN: PUBLICACIONES RECIENTES
+========================================= */
+
+.recent-posts {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Título de sección */
+.section-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Grid responsive de tarjetas */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* =========================================
+   TARJETAS DE PUBLICACIÓN
+========================================= */
+
+.post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+
+    /* Animación */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto hover */
+.post-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* Imagen de la publicación */
+.post-image {
+    position: relative;
+    height: 180px;
+}
+
+/* Ajuste de imagen */
+.post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Etiqueta de categoría */
+.category {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #3498db;
+    color: white;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* Contenido de la tarjeta */
+.post-body {
+    padding: 20px;
+}
+
+/* Título del post */
+.post-body h4 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+/* Descripción del post */
+.post-body p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+/* Enlace “leer más” */
+.read-more {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+

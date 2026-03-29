@@ -13,8 +13,14 @@ from semana_11.comentario import Comentario
 from bd import crear_conexion, init_db, get_usuario_by_id, verificar_credenciales, crear_usuario
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash
+from flask import render_template, make_response
+from semana_11.reporte import pdf_articulos, pdf_autores, pdf_completo
+from semana_11.modelos import Autor, Articulo
+from sqlalchemy.orm import joinedload
+
 
 # Configuración de la aplicación Flask para Blog Estudiantil
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'blog_estudiantil_clave_segura_2026'  # Cambiar en producción
 
@@ -104,7 +110,7 @@ def nuevo_articulo():
         # Validar que se haya seleccionado un autor válido
         if autor_id == 0:
             flash("Debe seleccionar un autor válido", "error")
-            return render_template("semana_11/inventario/form.html", form=form)
+            return render_template("semana_11/blog/form.html", form=form)
         
         # Crear instancia de artículo con datos del formulario
         nuevo_articulo = Articulo(None, form.titulo.data, form.contenido.data, autor_id)
@@ -122,7 +128,7 @@ def ver_blog():
     # Cargar datos desde BD
     blog.cargar_desde_db()
     articulos = blog.mostrar_todos_articulos()
-    return render_template('semana_11/inventario/inventario.html', articulos=articulos)
+    return render_template('semana_11/inventario/blog.html', articulos=articulos)
 
 @app.route('/articulo/<int:id>')
 def ver_articulo(id):
@@ -154,7 +160,7 @@ def buscar_articulo():
     articulos = blog.buscar_articulos_por_titulo(titulo)
     if not articulos:
         flash(f"No se encontraron artículos con '{titulo}'", "warning")
-    return render_template('semana_11/inventario/inventario.html', articulos=articulos)
+    return render_template('semana_11/inventario/blog.html', articulos=articulos)
 
 @app.route('/nuevo_autor', methods=["GET", "POST"])
 @login_required
@@ -172,7 +178,7 @@ def nuevo_autor():
         blog.agregar_autor(nuevo_autor)
         flash(f"Autor registrado exitosamente: {nuevo_autor.nombre}", "success")
         return redirect(url_for('autores'))
-    return render_template("semana_11/inventario/agregar.html", form=form)
+    return render_template("semana_11/inventario/nuevo_autor.html", form=form)
 
 @app.route('/agregar_comentario', methods=['POST'])
 def agregar_comentario():
@@ -249,7 +255,7 @@ def editar_articulo(id):
         return redirect(url_for("ver_articulo", id=id))
 
     # GET: Mostrar formulario con datos actuales
-    return render_template("semana_11/inventario/editar.html", articulo=articulo)
+    return render_template("semana_11/inventario/editar_articulo.html", articulo=articulo)
 
 
 @app.route("/editar_autor/<int:id>", methods=["GET", "POST"])
@@ -324,7 +330,7 @@ def eliminar_autor(id):
         session.close()
     return redirect(url_for('autores'))
 
-@app.route('/eliminar_articulo/<int:id>', methods=['POST'])
+@app.route('/eliminar_articulo/<int:id>', methods=['GET','POST'])
 @login_required
 def eliminar_articulo(id):
     """Elimina un artículo del blog y su BD.
@@ -348,6 +354,67 @@ def eliminar_articulo(id):
     finally:    
         session.close()
     return redirect(url_for('ver_blog'))
+
+#-----------SEMANA 15 - DESCARGA DE REPORTE -----------
+
+@app.route('/descarga')
+@login_required
+def descarga():
+    return render_template("semana_10/ediccion/descarga.html")
+
+
+@app.route("/descargar/autores")
+@login_required
+def descargar_autores():
+    session = crear_conexion()
+    try:
+        autores = session.query(Autor).all()
+    finally:
+        session.close()
+
+    pdf = pdf_autores(autores)
+    response = make_response(pdf)
+    response.headers.set("Content-Type", "application/pdf")
+    response.headers.set("Content-Disposition", "attachment", filename="autores.pdf")
+    return response
+
+
+@app.route("/descargar/articulos")
+@login_required
+def descargar_articulos():
+    session = crear_conexion()
+    try:
+        articulos = session.query(Articulo)\
+            .options(joinedload(Articulo.autor))\
+            .all()
+    finally:
+        session.close()
+
+    pdf = pdf_articulos(articulos)
+    response = make_response(pdf)
+    response.headers.set("Content-Type", "application/pdf")
+    response.headers.set("Content-Disposition", "attachment", filename="articulos.pdf")
+    return response
+
+
+@app.route("/descargar/completo")
+@login_required
+def descargar_completo():
+    session = crear_conexion()
+    try:
+        autores = session.query(Autor).all()
+        articulos = session.query(Articulo)\
+            .options(joinedload(Articulo.autor))\
+            .all()
+    finally:
+        session.close()
+
+    pdf = pdf_completo(articulos, autores)
+    response = make_response(pdf)
+    response.headers.set("Content-Type", "application/pdf")
+    response.headers.set("Content-Disposition", "attachment", filename="reporte.pdf")
+    return response
+
 
 if __name__ == "__main__":
     app.run(debug=True)

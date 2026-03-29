@@ -1,52 +1,82 @@
+<!-- Hereda la estructura base del sistema (navbar, footer, etc.) -->
+
 {% extends "semana_10/ediccion/base.html" %}
 
+<!-- Bloque para agregar estilos CSS específicos de esta vista -->
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/autores.css') }}">
 {% endblock %}
 
+<!-- Título que se mostrará en la pestaña del navegador -->
 {% block title %}
 Autores - Blog Estudiantil
 {% endblock %}
 
 {% block content %}
+
+
 <section class="autores">
 
+    <!-- Encabezado de la sección -->
     <div class="autores-header">
         <h2>Autores del Blog Estudiantil</h2>
-        <p>Conoce a los autores que contribuyen con artículos y contenido educativo.</p>
-        <p>¿Quieres unirte? 
+
+        <!-- Descripción informativa -->
+        <p class="descripcion">
+        Conoce a los autores que contribuyen con artículos y contenido educativo.</p>
+        
+        <!-- Enlace para registrar un nuevo autor -->
+        <p class="quieres-unirte">
+        <strong> ¿Quieres unirte? </strong> 
             <a href="{{ url_for('nuevo_autor') }}" class="btn-registro">Regístrate aquí</a>
         </p>
     </div>
 
+    <!-- Verifica si existen autores en la base de datos -->
     {% if autores %}
         <div class="autores-grid">
+
+            <!-- Recorre cada autor y lo muestra en una tarjeta -->
             {% for autor in autores %}
+
             <article class="autor-card">
 
+                <!-- Información principal del autor -->
                 <div class="autor-info">
+
+                    <!-- Avatar con la inicial del nombre -->
                     <div class="autor-avatar">
                         {{ autor.nombre[0].upper() }}
                     </div>
+
+                    <!-- Datos del autor -->
                     <div class="autor-datos">
                         <h3>{{ autor.nombre }}</h3>
                         <small>{{ autor.email }}</small>
                     </div>
                 </div>
 
+                <!-- Biografía del autor -->
                 <div class="autor-bio">
                     {% if autor.bio %}
                         <p>
+                            <!-- Se limita la biografía a 120 caracteres -->
                             {{ autor.bio[:120] }}
                             {% if autor.bio|length > 120 %}...{% endif %}
                         </p>
                     {% else %}
+            
+                        <!-- Mensaje si no tiene biografía -->        
                         <p class="sin-bio">Sin biografía aún.</p>
                     {% endif %}
                 </div>
 
                 <div class="autor-acciones">
+
+                    <!-- Botón para editar -->
                     <a href="{{ url_for('editar_autor', id=autor.id) }}" class="btn btn-edit">Editar</a>
+                    
+                    <!-- Botón para eliminar con confirmación -->
                     <a href="{{ url_for('eliminar_autor', id=autor.id) }}" 
                        class="btn btn-delete" 
                        onclick="return confirm('¿Eliminar autor y artículos?')">
@@ -58,12 +88,15 @@ Autores - Blog Estudiantil
             {% endfor %}
         </div>
     {% else %}
+
+       <!-- Mensaje cuando no existen autores -->
         <div class="autores-vacio">
             <p>👤 Aún no hay autores registrados.</p>
             <p>¡Sé el primero en unirte!</p>
         </div>
     {% endif %}
 
+    <!-- Botón para volver al blog -->
     <div class="autores-footer">
         <a href="{{ url_for('ver_blog') }}" class="btn btn-blog">Volver al Blog</a>
     </div>

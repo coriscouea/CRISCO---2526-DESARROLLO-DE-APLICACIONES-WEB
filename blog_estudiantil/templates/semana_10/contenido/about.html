@@ -1,40 +1,126 @@
-<!-- about.html - Página Acerca de del Blog Estudiantil -->
-<!-- Hereda de base.html y muestra información sobre el proyecto del blog -->
+<!-- =========================================
+     ABOUT.HTML - PÁGINA ACERCA DE
+========================================= -->
 
+<!-- Hereda la estructura base del sistema -->
 {% extends "semana_10/ediccion/base.html" %}
-<!-- Extiende la plantilla base para heredar su estructura -->
 
+<!-- Carga de estilos específicos para esta vista -->
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 {% endblock %}
 
+<!-- Título que aparece en la pestaña del navegador -->
 {% block title %} Acerca de - Blog Estudiantil {% endblock %}
-<!-- Define el título de la página en el navegador -->
 
 {% block content %}
-<!-- Inicio del bloque de contenido específico de esta página -->
+<!-- Inicio del contenido principal -->
 
 <div class="about-container">
 
-<h2 class="intro">Sobre el Blog Estudiantil</h2>
+    <!-- Título principal de la sección -->
+    <h2 class="intro">Sobre el Blog Estudiantil</h2>
 
-<p class="descripcion">
-Este Blog fue creado para fomentar el intercambio de conocimientos y experiencias entre estudiantes universitarios.
-</p>
+    <!-- Descripción general del propósito del blog -->
+    <p class="descripcion">
+        Este Blog fue creado para fomentar el intercambio de conocimientos y experiencias entre estudiantes universitarios.
+    </p>
 
-<ul class="caracteristicas">
-    <li>Una plataforma de blogging completa desarrollada con tecnologías modernas como Flask, SQLite y Jinja2.</li>
-    <li>Permite a los estudiantes publicar artículos, compartir ideas y colaborar en proyectos académicos.</li>
-    <li>Incluye funcionalidades como registro de autores, creación y edición de artículos y un sistema de comentarios.</li>
-</ul>
+    <!-- Lista de características principales del sistema -->
+    <ul class="caracteristicas">
 
-<p class="objetivo">
-Nuestro objetivo es proporcionar un espacio colaborativo donde los estudiantes puedan compartir artículos, tutoriales y consejos académicos.
-</p>
+        <!-- Característica 1 -->
+        <li class="card-tech">
+            Plataforma de blogging desarrollada con tecnologías modernas como Flask, SQLite y Jinja2.
+        </li>
 
-<img src="{{ url_for('static', filename='assets/img/blog.png') }}" alt="Imagen del Blog Estudiantil">
+        <!-- Característica 2 -->
+        <li class="card-study">
+            Permite a los estudiantes publicar artículos, compartir ideas y colaborar en proyectos académicos.
+        </li>
+
+        <!-- Característica 3 -->
+        <li class="card-community">
+            Incluye funcionalidades como registro de autores, creación y edición de artículos y sistema de comentarios.
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- =========================================
+     SECCIÓN VALORACIONES
+========================================= -->
+
+<div class="valoraciones">
+
+    <h3>Lo que dicen nuestros usuarios</h3>
+
+    <div class="reviews">
+
+        <div class="review-card">
+            <p>"Una plataforma excelente para compartir conocimientos."</p>
+            <span>⭐⭐⭐⭐⭐</span>
+        </div>
+
+        <div class="review-card">
+            <p>"Muy intuitiva y útil para estudiantes."</p>
+            <span>⭐⭐⭐⭐</span>
+        </div>
+
+        <div class="review-card">
+            <p>"Me ayudó a mejorar mis habilidades académicas."</p>
+            <span>⭐⭐⭐⭐⭐</span>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================================
+     TAGS / TEMAS DEL BLOG
+========================================= -->
+
+<div class="tags">
+
+    <h3>Temas que encontrarás</h3>
+
+    <div class="tag-list">
+        <span>#Tecnología</span>
+        <span>#Educación</span>
+        <span>#Programación</span>
+        <span>#Estudiantes</span>
+        <span>#Innovación</span>
+    </div>
+
+</div>
+
+<!-- =========================================
+     REDES SOCIALES
+========================================= -->
+
+<div class="redes">
+
+    <h3>Síguenos</h3>
+
+    <div class="social-links">
+
+        <a href="https://www.facebook.com/" class="facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+
+        <a href="https://www.instagram.com/" class="instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+
+        <a href="https://es.linkedin.com/" class="linkedin">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+
+    </div>
 
 </div>
 
 {% endblock %}
-<!-- Fin del bloque de contenido -->
+<!-- Fin del contenido -->

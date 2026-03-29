@@ -1,0 +1,181 @@
+<!-- =========================================
+     BLOG.HTML - LISTADO DE ARTÍCULOS
+     Página principal donde se visualizan,
+     buscan y gestionan los artículos del blog
+========================================= -->
+
+<!-- Hereda la estructura base del proyecto -->
+{% extends "semana_10/ediccion/base.html" %}
+
+<!-- Carga de estilos específicos -->
+{% block extra_css %}
+<!-- Se enlaza el archivo CSS principal del blog -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+{% endblock %}
+
+<!-- Título de la página -->
+{% block title %}Blog Estudiantil{% endblock %}
+
+{% block content %}
+<!-- Inicio del contenido principal -->
+
+<!-- Contenedor del encabezado -->
+<div class="blog-container">
+
+    <!-- Título principal del blog -->
+    <h2>Estudiantil - Artículos Publicados</h2>
+    
+    <!-- Descripción del propósito del blog -->
+    <p class="descripcion">
+        Descubre los artículos más recientes escritos por nuestros estudiantes. 
+        Comparte conocimientos y experiencias.
+    </p>
+
+</div>
+
+<!-- =========================================
+     ACCIONES ADMINISTRATIVAS
+     Permiten crear contenido o registrar autores
+========================================= -->
+
+<div class="admin-actions">
+
+    <!-- Botón para crear un nuevo artículo -->
+    <a href="{{ url_for('nuevo_articulo') }}" class="btn btn-publicar">
+        📝 Publicar Nuevo Artículo
+    </a>
+
+    <!-- Botón para registrar un nuevo autor -->
+    <a href="{{ url_for('nuevo_autor') }}" class="btn btn-registrar">
+        👤 Registrar Nuevo Autor
+    </a>
+
+</div>
+
+<!-- =========================================
+     FORMULARIO DE BÚSQUEDA
+     Permite filtrar artículos por título
+========================================= -->
+
+<div class="buscar-form">
+
+    <!-- Imagen -->
+    <img src="{{ url_for('static', filename='assets/img/titulo.png')}}" 
+         alt="logo" 
+         class="logo-titulo">
+    <div>
+        <!-- Título del buscador -->
+        <h3 class="busqueda">Buscar Artículos:</h3>
+
+        <!-- Formulario que envía datos al backend Flask -->
+        <form action="{{ url_for('buscar_articulo') }}" method="POST">
+
+            <!-- Etiqueta del campo -->
+            <label for="titulo_busqueda">Buscar por título:</label>
+
+            <!-- Campo de entrada de texto -->
+            <input type="text" 
+                name="titulo" 
+                id="titulo_busqueda" 
+                class="input-text" 
+                placeholder="Ingresa el título del artículo">
+
+            <!-- Botón para ejecutar la búsqueda -->
+            <input type="submit" value="Buscar" class="btn-buscar">
+
+        </form>
+    </div>
+</div>
+
+<!-- =========================================
+     LISTADO DE ARTÍCULOS
+========================================= -->
+
+<!-- Verifica si existen artículos -->
+{% if articulos %}
+
+<div class="articulos-grid">
+
+    <!-- Recorre cada artículo desde el backend -->
+    {% for articulo in articulos %}
+
+    <!-- Tarjeta individual de artículo -->
+    <article class="articulo-card">
+
+        <!-- Título del artículo con enlace -->
+        <h3>
+            <a href="{{ url_for('ver_articulo', id=articulo.id) }}">
+                {{ articulo.titulo }}
+            </a>
+        </h3>
+
+        <!-- Información del artículo -->
+        <div class="articulo-meta">
+            <!-- Autor -->
+            <span>
+                ✍️ Por: 
+                {{ articulo.autor_id if articulo.autor_id else 'Anónimo' }}
+            </span>
+
+            <!-- Fecha -->
+            <span>
+                📅 
+                {{ articulo.fecha_publicacion if articulo.fecha_publicacion else 'Fecha no disponible' }}
+            </span>
+        </div>
+
+        <!-- Vista previa del contenido -->
+        <div class="articulo-contenido">
+
+            <!-- Se muestran los primeros 200 caracteres -->
+            {{ articulo.contenido[:200] }}...
+
+            <!-- Enlace para ver el contenido completo -->
+            <a href="{{ url_for('ver_articulo', id=articulo.id) }}" class="read-more">
+                Leer más
+            </a>
+
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="articulo-acciones">
+
+            <!-- Ver artículo -->
+            <a href="{{ url_for('ver_articulo', id=articulo.id) }}" class="btn btn-ver">
+                Ver Artículo
+            </a>
+
+            <!-- Editar artículo -->
+            <a href="{{ url_for('editar_articulo', id=articulo.id) }}" class="btn btn-edit">
+                Editar
+            </a>
+
+            <!-- Eliminar artículo con confirmación -->
+            <a href="{{ url_for('eliminar_articulo', id=articulo.id)}}" 
+               class="btn btn-delete"
+               onclick="return confirm('¿Eliminar artículo?')">
+               Eliminar
+            </a>
+
+        </div>
+
+    </article>
+
+    {% endfor %}
+
+</div>
+
+</div>
+
+{% else %}
+
+<!-- Mensaje cuando no existen artículos -->
+<p class="no-data">
+    No hay artículos publicados actualmente. 
+    ¡Sé el primero en compartir tu conocimiento!
+</p>
+
+{% endif %}
+
+{% endblock %}
+<!-- Fin del contenido -->

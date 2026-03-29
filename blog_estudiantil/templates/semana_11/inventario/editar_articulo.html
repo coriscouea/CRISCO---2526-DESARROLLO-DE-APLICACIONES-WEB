@@ -1,0 +1,130 @@
+<!-- =========================================
+     EDITAR_ARTICULO.HTML - PANEL DE EDICIÓN
+========================================= -->
+
+<!-- Hereda la estructura base del proyecto -->
+{% extends "semana_10/ediccion/base.html" %}
+
+{% block extra_css %}
+    <!-- Enlace al CSS específico para mantener estilos organizados -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editar_articulo.css') }}">
+{% endblock %}
+
+<!-- Título dinámico que aparece en la pestaña del navegador -->
+{% block title %}Editando: {{ articulo.titulo }}{% endblock %}
+
+{% block content %}
+
+<!-- Contenedor principal de la vista -->
+<div class="contenedor-edicion">
+    
+    <!-- =========================================
+         ENCABEZADO
+    ========================================= -->
+    <header class="encabezado-form">
+        <!-- Título principal -->
+        <h2 class="titulo-seccion">📝 Panel de Edición</h2>
+
+        <!-- Texto descriptivo -->
+        <p class="subtitulo">
+            Actualiza los detalles de tu publicación de forma segura.
+        </p>
+    </header>
+
+    <!-- =========================================
+         FORMULARIO DE EDICIÓN
+    ========================================= -->
+    <form method="POST" 
+          action="{{ url_for('editar_articulo', id=articulo.id) }}" 
+          class="form-estilizado">
+        
+        <!-- ===== ID DEL ARTÍCULO (NO EDITABLE) ===== -->
+        <div class="grupo-campo">
+
+            <!-- Etiqueta -->
+            <label class="etiqueta-form" for="articulo_id">
+                ID del Registro
+            </label>
+
+            <!-- Input bloqueado -->
+            <div class="input-fijo">
+                <span class="prefijo">#</span>
+                <input type="text" id="articulo_id" value="{{ articulo.id }}" readonly>
+            </div>
+
+            <!-- Texto de ayuda -->
+            <small class="ayuda-texto">
+                El identificador único no puede ser modificado.
+            </small>
+        </div>
+
+        <!-- ===== TÍTULO DEL ARTÍCULO ===== -->
+        <div class="grupo-campo">
+
+            <label class="etiqueta-form" for="titulo">
+                Título de la Publicación
+            </label>
+
+            <!-- Input editable -->
+            <input type="text" 
+                   id="titulo" 
+                   name="titulo" 
+                   value="{{ articulo.titulo }}" 
+                   class="input-texto" 
+                   required 
+                   placeholder="Escribe un título impactante...">
+        </div>
+
+        <!-- ===== CONTENIDO DEL ARTÍCULO ===== -->
+        <div class="grupo-campo">
+
+            <label class="etiqueta-form" for="contenido">
+                Cuerpo del Artículo
+            </label>
+
+            <!-- Área de texto -->
+            <textarea id="contenido" 
+                      name="contenido" 
+                      class="input-area" 
+                      rows="12" 
+                      required 
+                      placeholder="Desarrolla tu idea aquí...">
+                {{ articulo.contenido }}
+            </textarea>
+        </div>
+
+        <!-- =========================================
+             BOTONES DE ACCIÓN
+        ========================================= -->
+        <div class="acciones-form">
+
+            <!-- Botón guardar -->
+            <button type="submit" class="btn-principal btn-guardar">
+                💾 Guardar Cambios
+            </button>
+
+            <!-- Botón cancelar -->
+            <a href="{{ url_for('ver_articulo', id=articulo.id) }}" 
+               class="btn-secundario">
+               Cancelar
+            </a>
+
+        </div>
+
+    </form>
+
+    <!-- =========================================
+         NAVEGACIÓN INFERIOR
+    ========================================= -->
+    <div class="pie-formulario">
+
+        <!-- Enlace de retorno -->
+        <a href="{{ url_for('ver_blog') }}" class="enlace-retorno">
+            ← Volver al listado del Blog
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

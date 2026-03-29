@@ -1,131 +1,154 @@
-<!-- ver_articulo.html - Página para ver un artículo completo del Blog Estudiantil -->
-<!-- Hereda de base.html y muestra el artículo con sus comentarios -->
-
 {% extends "semana_10/ediccion/base.html" %}
+
 {% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ver_articulo.css') }}">
 {% endblock %}
-<!-- Extiende la plantilla base para heredar su estructura -->
 
 {% block title %}{{ articulo.titulo }}{% endblock %}
-<!-- Define el título dinámico de la página usando el título del artículo -->
 
 {% block content %}
-<!-- Inicio del bloque de contenido específico de esta página -->
 
-<!-- Mostrar artículo completo -->
-<div class="articulo-completo">
-<!-- Contenedor del artículo completo -->
+<!-- =========================================
+     CONTENEDOR PRINCIPAL DEL ARTÍCULO
+========================================= -->
 
-    <h2>{{ articulo.titulo }}</h2>
-    <!-- Título del artículo -->
+<article class="articulo-container">
 
-    <div class="articulo-meta">
-    <!-- Contenedor de metadatos del artículo -->
-        <span>✍️ Por: {{ autor.nombre if autor else 'Anónimo' }}</span>
-        <!-- Muestra el nombre del autor o "Anónimo" si no existe -->
-        <span>📅 {{ articulo.fecha_publicacion if articulo.fecha_publicacion else 'Fecha no disponible' }}</span>
-        <!-- Muestra la fecha de publicación o mensaje si no hay fecha -->
-        <a href="{{ url_for('editar_articulo', id=articulo.id) }}" class="btn">✏️ Editar Artículo</a>
-        <!-- Enlace para editar el artículo -->
-    </div>
+    <!-- =========================================
+         ENCABEZADO DEL ARTÍCULO
+    ========================================= -->
+    <header class="articulo-header">
 
-    <div class="articulo-contenido-completo">
-    <!-- Contenedor del contenido completo del artículo -->
-        {{ articulo.contenido }}
-        <!-- Muestra todo el contenido del artículo -->
-    </div>
-<!-- Fin del contenedor del artículo -->
+        <!-- Título -->
+        <h1 class="titulo-principal">{{ articulo.titulo }}</h1>
 
-<!-- Sección de comentarios -->
-<h3>💬 Comentarios ({{ comentarios|length }})</h3>
-<!-- Título de la sección de comentarios con contador -->
+        <!-- Metadatos -->
+        <div class="articulo-meta">
 
-{% if comentarios %}
-<!-- Verifica si hay comentarios para mostrar -->
+            <!-- Autor -->
+            <span>✍️ <strong>{{ autor.nombre if autor else 'Anónimo' }}</strong></span>
 
-    <div class="comentarios-lista">
-    <!-- Contenedor de la lista de comentarios -->
+            <!-- Fecha -->
+            <span>📅 {{ articulo.fecha_publicacion.strftime('%d/%m/%Y') }}</span>
 
-        {% for comentario in comentarios %}
-        <!-- Itera sobre cada comentario del artículo -->
+            <!-- Botón editar (solo logueado) -->
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('editar_articulo', id=articulo.id) }}" 
+                   class="btn-editar-icono">
+                   ✏️ Editar
+                </a>
+            {% endif %}
 
-        <div class="comentario">
-        <!-- Contenedor de un comentario individual -->
+        </div>
 
-            <div class="comentario-meta">
-            <!-- Metadatos del comentario (autor, fecha, acciones) -->
-                <strong>👤 {{ comentario.autor }}</strong>
-                <!-- Nombre del autor del comentario -->
-                <span>{{ comentario.fecha_comentario if comentario.fecha_comentario else 'Fecha no disponible' }}</span>
-                <!-- Fecha del comentario -->
-                <a href="{{ url_for('eliminar_comentario', id=comentario.id) }}" class="btn-eliminar" onclick="return confirm('¿Estás seguro de eliminar este comentario?')">🗑️ Eliminar</a>
-                <!-- Enlace para eliminar el comentario con confirmación -->
+    </header>
+
+    <!-- =========================================
+         CONTENIDO DEL ARTÍCULO
+    ========================================= -->
+    <section class="articulo-cuerpo">
+
+        <!-- Renderiza contenido (permite HTML) -->
+        {{ articulo.contenido | safe }}
+
+    </section>
+
+    <hr>
+
+    <!-- =========================================
+         SECCIÓN DE COMENTARIOS
+    ========================================= -->
+    <section class="seccion-comentarios">
+
+        <!-- Título -->
+        <h3>💬 Comentarios ({{ comentarios|length }})</h3>
+
+        <!-- Lista -->
+        <div class="lista-comentarios">
+
+            {% for comentario in comentarios %}
+
+            <!-- Tarjeta comentario -->
+            <div class="tarjeta-comentario">
+
+                <div class="cabecera-comentario">
+                    <strong>{{ comentario.autor }}</strong>
+                    <small>{{ comentario.fecha_comentario.strftime('%H:%M - %d/%m/%y') }}</small>
+                </div>
+
+                <p class="texto-comentario">
+                    {{ comentario.contenido }}
+                </p>
+
+                <!-- Eliminar -->
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('eliminar_comentario', id=comentario.id) }}"
+                       class="enlace-eliminar"
+                       onclick="return confirm('¿Seguro que quieres borrar este comentario?')">
+                       Eliminar
+                    </a>
+                {% endif %}
+
             </div>
 
-            <div class="comentario-contenido">
-            <!-- Contenido del comentario -->
-                {{ comentario.contenido }}
-                <!-- Texto del comentario -->
-            </div>
-        <!-- Fin del comentario individual -->
+            {% else %}
 
-        {% endfor %}
-        <!-- Fin del ciclo for de comentarios -->
+            <!-- Sin comentarios -->
+            <p class="sin-comentarios">
+                Aún no hay opiniones. ¡Sé el primero en escribir!
+            </p>
 
+            {% endfor %}
+
+        </div>
+
+        <!-- =========================================
+             FORMULARIO DE COMENTARIOS
+        ========================================= -->
+
+        <div class="contenedor-formulario">
+
+            <h4>Deja tu comentario</h4>
+
+            <form action="{{ url_for('agregar_comentario') }}" method="POST">
+
+                <!-- ID del artículo -->
+                <input type="hidden" name="articulo_id" value="{{ articulo.id }}">
+
+                <!-- Nombre -->
+                <div class="campo">
+                    <label>Tu Nombre:</label>
+                    <input type="text" name="autor" required>
+                </div>
+
+                <!-- Comentario -->
+                <div class="campo">
+                    <label>Tu Opinión:</label>
+                    <textarea name="contenido" rows="4" required></textarea>
+                </div>
+
+                <!-- Botón -->
+                <button type="submit" class="btn-enviar">
+                    Publicar Comentario
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <!-- =========================================
+         BOTÓN VOLVER
+    ========================================= -->
+
+    <div class="pie-articulo">
+
+        <a href="{{ url_for('ver_blog') }}" class="btn-volver">
+            ← Volver a la lista
+        </a>
     </div>
-    <!-- Fin de la lista de comentarios -->
 
-{% else %}
-<!-- Si no hay comentarios -->
-
-    <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
-    <!-- Mensaje cuando no hay comentarios -->
-
-{% endif %}
-<!-- Fin de la condición if de comentarios -->
-
-<!-- Formulario para agregar comentario -->
-<h3>Agregar Comentario</h3>
-<!-- Título del formulario de comentarios -->
-
-<form action="{{ url_for('agregar_comentario') }}" method="POST" class="form-comentario">
-<!-- Formulario para agregar un nuevo comentario -->
-
-    <input type="hidden" name="articulo_id" value="{{ articulo.id }}">
-    <!-- Campo oculto con el ID del artículo -->
-
-    <div class="form-group">
-    <!-- Contenedor del campo de nombre -->
-        <label class="form-label" for="autor">Tu Nombre:</label>
-        <!-- Etiqueta del campo nombre -->
-        <input type="text" id="autor" name="autor" class="form-input" required placeholder="Ingresa tu nombre">
-        <!-- Campo de texto para el nombre del comentarista -->
-    </div>
-
-    <div class="form-group">
-    <!-- Contenedor del campo de comentario -->
-        <label class="form-label" for="contenido">Comentario:</label>
-        <!-- Etiqueta del campo comentario -->
-        <textarea id="contenido" name="contenido" class="form-textarea" rows="4" required placeholder="Escribe tu comentario..."></textarea>
-        <!-- Área de texto para el contenido del comentario -->
-    </div>
-
-    <div class="form-group">
-    <!-- Contenedor del botón de envío -->
-        <input type="submit" value="💬 Publicar Comentario" class="btn-submit">
-        <!-- Botón para enviar el comentario -->
-    </div>
-
-</form>
-<!-- Fin del formulario de comentarios -->
-
-<div style="margin-top: 2rem;">
-<!-- Contenedor con margen superior para el enlace de vuelta -->
-    <a href="{{ url_for('ver_blog') }}" class="btn btn-blog">Volver al Blog</a>
-    <!-- Enlace para regresar a la página del blog -->
-</div>
+</article>
 
 {% endblock %}
-<!-- Fin del bloque de contenido -->

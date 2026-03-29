@@ -1,10 +1,10 @@
-# Mi Página Web - Tarea Semana 14
+# Mi Página Web - Tarea Semana 15
 
 📌 Descripción
 
-Implementación de un sistema de login con flask
+Construcción de una aplicación que incluya funciones de CRUD crear, leer, actualizar, eliminar
 
-**python, Entorno virtual, Flask, jinja2, SQLite3, CSS, SQLAlchemy, Flask-Login **.
+**python, Entorno virtual, Flask, jinja2, SQLite3, CSS, SQLAlchemy, Flask-Login, fpdf **.
 
 Ejemplo de Salida:
 
@@ -21,4 +21,6 @@ http://127.0.0.1:5000/nuevo_articulo
 http://127.0.0.1:5000/nuevo_autor
 
 http://127.0.0.1:5000/login
+
+http://127.0.0.1:5000/descarga
 

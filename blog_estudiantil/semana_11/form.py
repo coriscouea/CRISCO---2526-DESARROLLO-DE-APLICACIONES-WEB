@@ -82,7 +82,7 @@ class AutorForm(FlaskForm):
         'Biografía',
         validators=[
             Optional(),
-            Length(max=500, message='La biografía no puede exceder 500 caracteres')
+            Length(max=1000, message='La biografía no puede exceder 500 caracteres')
         ]
     )
     submit = SubmitField('Registrar Autor')

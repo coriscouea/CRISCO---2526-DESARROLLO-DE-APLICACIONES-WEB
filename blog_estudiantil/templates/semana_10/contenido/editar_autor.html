@@ -2,16 +2,28 @@
 
 {% extends "semana_10/ediccion/base.html" %}
 {% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/autores.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/editar_autor.css') }}">
 {% endblock %}
 
 {% block title %}Editar Autor{% endblock %}
 
 {% block content %}
 
-<h2>Editar Autor del Blog</h2>
-<p>Modifica la información del autor seleccionado.</p>
+
+<div class="editar-container">
+
+    <!-- Título principal -->
+    <header class="encabezado-form">
+
+        <h2 class="titulo-seccion"> Editar Autor del Blog</h2>
+
+        <!-- Texto descriptivo -->
+        <p class="subtitulo">
+        Modifica la información del autor seleccionado.</p>
+
+    </header>
+
+</div>
 
 <form method="POST" action="{{ url_for('editar_autor', id=autor.id) }}">
 
@@ -42,7 +54,7 @@
 </form>
 
 <div style="margin-top: 2rem;">
-    <a href="{{ url_for('autores') }}" class="btn ">Volver a Autores</a>
+    <a href="{{ url_for('autores') }}" class="btn "> ← Volver a Autores</a>
 </div>
 
 {% endblock %}
