@@ -22,11 +22,14 @@
     <title>{% block title %} Blog Estudiantil{% endblock %}</title>
     <!-- Título de la página con bloque para sobreescribir en plantillas hijo -->
 
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/img/titulo1.png') }}">
+        <!-- Define el icono localmente de la página -->
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 <!-- Enlaza la hoja de estilos CSS del directorio static -->
 
-    <!-- Define el icono localmente de la página -->
-    <link rel="icon" type="imagen/png" href="static/assets/img/titulo1.png">
+    
+
 
 {% block extra_css %}{% endblock %}
     <!-- Enlaza la hoja de estilos CSS del directorio static -->

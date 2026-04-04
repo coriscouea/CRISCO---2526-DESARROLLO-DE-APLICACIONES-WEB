@@ -1,8 +1,8 @@
-# Mi Página Web - Tarea Semana 15
+# Mi Página Web - Tarea Semana 16
 
 📌 Descripción
 
-Construcción de una aplicación que incluya funciones de CRUD crear, leer, actualizar, eliminar
+Pruebas y despliegue local de la aplicación web
 
 **python, Entorno virtual, Flask, jinja2, SQLite3, CSS, SQLAlchemy, Flask-Login, fpdf **.
 

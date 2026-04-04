@@ -48,7 +48,7 @@ class PDF(FPDF):
 # =========================
 # REPORTE DE AUTORES
 # =========================
-def pdf_autores(autores):
+def pdf_autores(AutorModel):
 
     # Crear objeto PDF
     pdf = PDF()
@@ -70,7 +70,7 @@ def pdf_autores(autores):
     # Contenido tabla
     pdf.set_font("Arial", "", 9)
 
-    for autor in autores:
+    for autor in AutorModel:
 
         # Nombre
         pdf.cell(60, 8, autor.nombre, 1)
@@ -92,7 +92,7 @@ def pdf_autores(autores):
 # =========================
 # REPORTE DE ARTÍCULOS
 # =========================
-def pdf_articulos(articulos):
+def pdf_articulos(ArticuloModel):
 
     pdf = PDF()
     pdf.add_page()
@@ -103,7 +103,7 @@ def pdf_articulos(articulos):
     pdf.ln(5)
 
     # Recorrer artículos
-    for art in articulos:
+    for art in ArticuloModel:
 
         # Título del artículo
         pdf.set_font("Arial", "B", 12)
@@ -134,7 +134,7 @@ def pdf_articulos(articulos):
 # =========================
 # REPORTE COMPLETO
 # =========================
-def pdf_completo(articulos, autores):
+def pdf_completo(ArticuloModel, AutorModel):
 
     # Crear PDF
     pdf = PDF()
@@ -164,7 +164,7 @@ def pdf_completo(articulos, autores):
     # Datos
     pdf.set_font("Arial", "", 9)
 
-    for autor in autores:
+    for autor in AutorModel:
 
         pdf.cell(60, 8, autor.nombre, 1)
         pdf.cell(60, 8, autor.email, 1)
@@ -187,7 +187,7 @@ def pdf_completo(articulos, autores):
     pdf.set_font("Arial", "B", 12)
     pdf.cell(0, 10, "Artículos Publicados", 0, 1)
 
-    for art in articulos:
+    for art in ArticuloModel:
 
         # Título
         pdf.set_font("Arial", "B", 12)

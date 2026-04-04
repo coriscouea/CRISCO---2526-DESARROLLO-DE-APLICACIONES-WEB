@@ -15,7 +15,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from werkzeug.security import generate_password_hash
 from flask import render_template, make_response
 from semana_11.reporte import pdf_articulos, pdf_autores, pdf_completo
-from semana_11.modelos import Autor, Articulo
+from semana_11.modelos import Autor as AutorModel, Articulo as ArticuloModel
 from sqlalchemy.orm import joinedload
 
 
@@ -78,10 +78,10 @@ def acerca_de():
 @app.route("/autores")
 def autores():
     """Página que muestra la lista de autores registrados en el blog estudiantil."""
-    from semana_11.modelos import Autor
+    from semana_11.modelos import Autor as AutorModel
     session = crear_conexion()
     try:
-        lista = session.query(Autor).all()
+        lista = session.query(AutorModel).all()
     finally:
         session.close()
     return render_template("semana_10/contenido/autores.html", autores=lista)
@@ -219,7 +219,7 @@ def editar_articulo(id):
 
     GET: Muestra formulario con datos actuales del artículo
     POST: Actualiza el artículo en BD usando SQLAlchemy"""
-    from semana_11.modelos import Articulo
+    from semana_11.modelos import Articulo as ArticuloModel
     
     blog.cargar_desde_db()
     articulo = blog.obtener_articulo(id)
@@ -235,7 +235,7 @@ def editar_articulo(id):
         # Actualizar artículo usando SQLAlchemy
         session = crear_conexion()
         try:
-            articulo_db = session.query(Articulo).filter(Articulo.id == id).first()
+            articulo_db = session.query(ArticuloModel).filter(ArticuloModel.id == id).first()
             if articulo_db:
                 articulo_db.titulo = titulo
                 articulo_db.contenido = contenido
@@ -265,7 +265,7 @@ def editar_autor(id):
 
     GET: Muestra formulario con datos actuales del autor
     POST: Actualiza el autor en BD usando SQLAlchemy"""
-    from semana_11.modelos import Autor
+    from semana_11.modelos import Autor as AutorModel
     
     blog.cargar_desde_db()
     autor = blog.obtener_autor(id)
@@ -282,7 +282,7 @@ def editar_autor(id):
         # Actualizar autor usando SQLAlchemy
         session = crear_conexion()
         try:
-            autor_db = session.query(Autor).filter(Autor.id == id).first()
+            autor_db = session.query(AutorModel).filter(AutorModel.id == id).first()
             if autor_db:
                 autor_db.nombre = nombre
                 autor_db.email = email
@@ -312,11 +312,11 @@ def editar_autor(id):
 def eliminar_autor(id):
     """Elimina un autor (cascade artículos)."""
     
-    from semana_11.modelos import Autor
+    from semana_11.modelos import Autor as AutorModel
     session = crear_conexion()
 
     try:   
-        autor = session.query(Autor).filter(Autor.id == id).first()  
+        autor = session.query(AutorModel).filter(AutorModel.id == id).first()  
         if autor:         
             session.delete(autor)        
             session.commit()         
@@ -338,10 +338,10 @@ def eliminar_articulo(id):
     Args:
         id: ID del artículo a eliminar"""
     
-    from semana_11.modelos import Articulo
+    from semana_11.modelos import Articulo as ArticuloModel
     session = crear_conexion()
     try:   
-        articulo = session.query(Articulo).filter(Articulo.id == id).first()  
+        articulo = session.query(ArticuloModel).filter(ArticuloModel.id == id).first()  
         if articulo:         
             session.delete(articulo)        
             session.commit()         
@@ -368,7 +368,7 @@ def descarga():
 def descargar_autores():
     session = crear_conexion()
     try:
-        autores = session.query(Autor).all()
+        autores = session.query(AutorModel).all()
     finally:
         session.close()
 
@@ -384,8 +384,8 @@ def descargar_autores():
 def descargar_articulos():
     session = crear_conexion()
     try:
-        articulos = session.query(Articulo)\
-            .options(joinedload(Articulo.autor))\
+        articulos = session.query(ArticuloModel)\
+            .options(joinedload(ArticuloModel.autor))\
             .all()
     finally:
         session.close()
@@ -402,9 +402,9 @@ def descargar_articulos():
 def descargar_completo():
     session = crear_conexion()
     try:
-        autores = session.query(Autor).all()
-        articulos = session.query(Articulo)\
-            .options(joinedload(Articulo.autor))\
+        autores = session.query(AutorModel).all()
+        articulos = session.query(ArticuloModel)\
+            .options(joinedload(ArticuloModel.autor))\
             .all()
     finally:
         session.close()

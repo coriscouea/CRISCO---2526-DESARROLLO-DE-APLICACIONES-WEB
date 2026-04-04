@@ -2,9 +2,11 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/ver_articulo.css') }}">
+
 {% endblock %}
 
 {% block title %}{{ articulo.titulo }}{% endblock %}
+
 
 {% block content %}
 
@@ -118,13 +120,13 @@
                 <!-- Nombre -->
                 <div class="campo">
                     <label>Tu Nombre:</label>
-                    <input type="text" name="autor" required>
+                    <input type="text" name="autor" placeholder="Ingresa tu nombre" required>
                 </div>
 
                 <!-- Comentario -->
                 <div class="campo">
                     <label>Tu Opinión:</label>
-                    <textarea name="contenido" rows="4" required></textarea>
+                    <textarea name="contenido" placeholder="Escribe tu comentario aquí..." rows="4" required></textarea>
                 </div>
 
                 <!-- Botón -->

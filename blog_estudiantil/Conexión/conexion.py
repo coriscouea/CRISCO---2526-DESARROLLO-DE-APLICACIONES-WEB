@@ -11,7 +11,7 @@ mysql_url = 'mysql+mysqlconnector://root:123456@localhost/blog_estudiantil'
 # Crear engine de SQLAlchemy para MySQL
 engine = create_engine(mysql_url, echo=False, pool_pre_ping=True)
 
-""" 
+"""
     Motor de SQLAlchemy: echo=False oculta los logs de SQL en consola. 
     pool_pre_ping=True es genial: verifica si la conexión sigue viva antes de 
     usarla (evita el error "MySQL server has gone away").
